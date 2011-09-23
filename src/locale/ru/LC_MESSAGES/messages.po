@@ -1,0 +1,237 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR ORGANIZATION
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+msgid ""
+msgstr ""
+"Content-Type: text/plain; charset=UTF-8\n"
+"Project-Id-Version: \n"
+"POT-Creation-Date: \n"
+"PO-Revision-Date: \n"
+"Last-Translator: Sergey Gulyaev <astraway@gmail.com>\n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+msgid "About Vertaler"
+msgstr "О программе"
+
+msgid "License"
+msgstr "Лицензия"
+
+msgid "< About"
+msgstr "< Описание"
+
+msgid "Unable to open the clipboard"
+msgstr "Невозможно открыть буфер обмена"
+
+msgid "Error"
+msgstr "Ошибка"
+
+msgid "No data in the clipboard in the required format"
+msgstr "Буфер обмена содержит данные неверного формата"
+
+msgid "Inter text"
+msgstr "Введите текст"
+
+msgid "Inter address and port for proxy"
+msgstr "Введите адрес и порт для прокси сервера"
+
+msgid "Inter address for proxy"
+msgstr "Введите адрес для прокси сервера"
+
+msgid "Inter port for proxy"
+msgstr "Введите порт для прокси сервера"
+
+msgid "Sorry, Can't connect to the server!"
+msgstr "Извините, сервер недоступен"
+
+msgid "Close"
+msgstr "Закрыть"
+
+msgid "Vertaler is an open source program that allows you to translate the text in a variety of applications using Google Translate and Bing Translator services"
+msgstr "Vertaler это программа с открытым исходным кодом, позволяющая переводить текст в различных приложениях, используя сервисы Google Translate и Bing Translator"
+
+msgid "Some icons are taken from libraries: "
+msgstr "Некоторые иконки взяты из библиотек: "
+
+msgid "Translate any text"
+msgstr "Переводите любой текст"
+
+msgid "Settings"
+msgstr "Параметры"
+
+msgid "Programm settings"
+msgstr "Параметры программы"
+
+msgid "Exit"
+msgstr "Выход"
+
+msgid "Main"
+msgstr "Главная"
+
+msgid "Clear"
+msgstr "Очистить"
+
+msgid "Clear forms"
+msgstr "Очистить формы"
+
+msgid "Cut"
+msgstr "Вырезать"
+
+msgid "Cut text"
+msgstr "Вырезать текст"
+
+msgid "Copy"
+msgstr "Копировать"
+
+msgid "Copy text"
+msgstr "Копировать текст"
+
+msgid "Paste"
+msgstr "Вставить"
+
+msgid "Paste text"
+msgstr "Вставить текст"
+
+msgid "Edit"
+msgstr "Редактировать"
+
+msgid "With CTRL press"
+msgstr "С нажатым CTRL"
+
+msgid "Translate with CTRL press"
+msgstr "Переводить только с нажатым CTRL"
+
+msgid "Nothing press"
+msgstr "Без нажатия"
+
+msgid "Load programm on startup"
+msgstr "Запуск при загрузке Windows"
+
+msgid "Translate without press button"
+msgstr "Переводить без нажатия кнопок"
+
+msgid "About"
+msgstr "О программе"
+
+msgid "About programm"
+msgstr "О программе"
+
+msgid "Help"
+msgstr "Помощь"
+
+msgid "Clear all"
+msgstr "Очистить все"
+
+msgid "Paste text from clipboard"
+msgstr "Вставить текст"
+
+msgid "Copy translated text"
+msgstr "Копировать переведенный текст"
+
+msgid "Translate text"
+msgstr "Перевести текст"
+
+msgid "Select text and choice language in Translate to for listen"
+msgstr "Выделите текст и выберите язык перевода для прослушивания"
+
+msgid "Select text and choice language in Translate to"
+msgstr "Выделите текст и выберите язык перевода"
+
+msgid "Translate from"
+msgstr "Исходный язык"
+
+msgid "Translate to"
+msgstr "Язык перевода"
+
+msgid "Open language settings"
+msgstr "Открыть настройки языков"
+
+msgid "Save language settings"
+msgstr "Сохранить текущие языки"
+
+msgid "Open settings"
+msgstr "Открыть параметры"
+
+msgid "Search"
+msgstr "Поиск"
+
+msgid "Open main window"
+msgstr "Открыть главное окно"
+
+msgid "Use keyboard button"
+msgstr "Использовать кнопки"
+
+msgid "Use translate services"
+msgstr "Сервисы для перевода"
+
+msgid "Proxy server setting"
+msgstr "Настройки прокси сервера"
+
+msgid "Use proxy server"
+msgstr "Использовать прокси сервер"
+
+msgid " Address"
+msgstr " Адрес"
+
+msgid " Port"
+msgstr " Порт"
+
+msgid " Login"
+msgstr " Логин"
+
+msgid " Password"
+msgstr " Пароль"
+
+msgid "Cancel"
+msgstr "Отмена"
+
+msgid "Save"
+msgstr "Сохранить"
+
+msgid "Choice favorite languages"
+msgstr "Выберите основные языки"
+
+msgid "Nothing"
+msgstr "Ничего"
+
+msgid "Source lang is "
+msgstr "Исходный язык "
+
+msgid "Disable Application"
+msgstr "Отключить приложение"
+
+msgid "Start when Windows start"
+msgstr "Запускать приложение вместе с Windows"
+
+msgid "Start with Windows"
+msgstr "Запускать с Windows"
+
+msgid "Translate with double CTRL"
+msgstr "Перевод по двойному нажатию CTRL"
+
+msgid "Don't show again"
+msgstr "Не показывать снова"
+
+msgid "Available the new version"
+msgstr "Доступна новая версия программы"
+
+msgid "you can download and install it"
+msgstr "вы можете скачать и установить ее"
+
+msgid "Choise search service"
+msgstr "Выберите сервис поиска"
+
+msgid "Use double Control"
+msgstr "Двойное нажатие Control"
+
+msgid "Check update on startup"
+msgstr "Проверять обновления при старте"
+
+msgid "Check update setting"
+msgstr "Настройки проверки обновления"
+
+msgid "Sorry, an error occurred"
+msgstr "Извините, возникла ошибка"
+
