@@ -224,7 +224,6 @@ class ControllerMain():
                 self.popUpFrame.view.Show()
 
         elif os.name =="nt":
-            options.isRunTranslate=True
             self.hm.UnhookKeyboard()
             run_clipboard(self)
             success = False
@@ -236,6 +235,7 @@ class ControllerMain():
                     if success:
                         self.popUpFrame.dataText = data.GetText().strip()
                         if self.popUpFrame.dataText!="":
+                            options.isRunTranslate=True
                             if isTranslateNow:
                                 options.countClickUp=1
                                 self.popUpFrame.translate()
