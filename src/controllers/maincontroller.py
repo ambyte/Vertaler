@@ -54,6 +54,7 @@ class ControllerMain():
         self.timeControl=0
         self.timeMouseDown=0
         self.dblCtrl=0
+        options.isRunTranslate=False
         self.ctrlPressed=False
         self.getClip=True
         self.mainFrame.view.Bind(wx.EVT_CLOSE,self.event_exit)
