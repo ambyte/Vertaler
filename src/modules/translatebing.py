@@ -48,10 +48,8 @@ class Translator(object):
             rv =  json.loads(response.decode("UTF-8-sig"))
             return rv
         except Exception, e:
-            if not e:
-                return _("Sorry, Can't connect to the server!")
-            else:
-                return e.message
+            return _("Sorry, Can't connect to the server!")
+
 
 
     def translate(self, text, to_lang, from_lang=None,

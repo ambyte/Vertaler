@@ -60,7 +60,5 @@ def translate_google(text, sourcelang="auto", targetlang="ru"):
             pass
         return resultData
     except Exception, e:
-        if not e:
-            return _("Sorry, Can't connect to the server!")
-        else:
-            return e.message
+        return _("Sorry, Can't connect to the server!")
+
