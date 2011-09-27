@@ -101,7 +101,7 @@ def restore_clipboard(self):
             win32clipboard.EmptyClipboard()
         try:
             win32clipboard.CloseClipboard()
-        except:
+        except Exception:
             pass
 
 def empty_clipboard(self):

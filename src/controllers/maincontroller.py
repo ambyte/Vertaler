@@ -33,6 +33,8 @@ elif os.name =="nt":
     from src.modules import getnewversion
     import pyHook as hooklib
     import pythoncom
+    import win32api
+    import win32con
 from wx.lib.pubsub import Publisher as pub
 from src.controllers.mainframecontroller import MainFrameController
 from src.controllers.popupcontroller import PopUpController
@@ -123,6 +125,9 @@ class ControllerMain():
                 if 200 > event.Time-self.timeKeyUp:
                     self.dblCtrl=0
                     self.timeKeyUp=0
+                    if os.name=="nt":
+                        win32api.keybd_event (win32con.VK_CONTROL, 0, win32con.KEYEVENTF_KEYUP, 0)
+                        win32api.keybd_event (ord('C'), 0, win32con.KEYEVENTF_KEYUP, 0)
                     self.get_clipboard_data(True)
                 else:
                     self.dblCtrl=1
