@@ -125,9 +125,6 @@ class ControllerMain():
                 if 200 > event.Time-self.timeKeyUp:
                     self.dblCtrl=0
                     self.timeKeyUp=0
-                    if os.name=="nt":
-                        win32api.keybd_event (win32con.VK_CONTROL, 0, win32con.KEYEVENTF_KEYUP, 0)
-                        win32api.keybd_event (ord('C'), 0, win32con.KEYEVENTF_KEYUP, 0)
                     self.get_clipboard_data(True)
                 else:
                     self.dblCtrl=1
@@ -251,9 +248,11 @@ class ControllerMain():
                 self.popUpFrame.dataText='error: '+sys.exc_info()[0].message.encode('utf-8')
                 self.popUpFrame.view.Show()
             finally:
-                if os.name =="nt":
-                    restore_clipboard(self)
-                    self.hm.HookKeyboard()
+                restore_clipboard(self)
+                if hooklib.GetKeyState(hooklib.HookConstants.VKeyToID('VK_CONTROL')):
+                    win32api.keybd_event(win32con.VK_CONTROL, 0, 0, 0)
+                    win32api.keybd_event (win32con.VK_CONTROL, 0, win32con.KEYEVENTF_KEYUP, 0)
+                self.hm.HookKeyboard()
 
     def version_result(self, msg):
         if options.version < msg.data:
