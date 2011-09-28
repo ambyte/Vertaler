@@ -57,14 +57,16 @@ class SettingFrameForPosix ( wx.Dialog ):
 
         sbSizerSearch = wx.StaticBoxSizer( wx.StaticBox( self, wx.ID_ANY, _("Choise search services") ), wx.HORIZONTAL )
 
-        self.s_choiceSearch = wx.Choice( self, wx.ID_ANY, wx.DefaultPosition, wx.Size( 150,-1 ), options.searchEngines, 0 )
+        self.s_choiceSearch = wx.Choice( self, wx.ID_ANY, wx.DefaultPosition, wx.Size( 150,-1 ),
+                                         options.searchEngines, 0 )
         sbSizerSearch.Add( self.s_choiceSearch, 1, wx.ALL|wx.EXPAND, 5 )
 
         bSizerChoiceCtrl.Add( sbSizerSearch, 0, wx.EXPAND, 5 )
 
         sbSizerDblCtrl = wx.StaticBoxSizer( wx.StaticBox( self, wx.ID_ANY, _("Use double Control") ), wx.VERTICAL )
 
-        self.s_checkBoxDblCtrl = wx.CheckBox( self, wx.ID_ANY, _("Translate with double CTRL"), wx.DefaultPosition, wx.DefaultSize, 0 )
+        self.s_checkBoxDblCtrl = wx.CheckBox( self, wx.ID_ANY, _("Translate with double CTRL"),
+                                              wx.DefaultPosition, wx.DefaultSize, 0 )
         sbSizerDblCtrl.Add( self.s_checkBoxDblCtrl, 0, wx.ALL, 5 )
 
         bSizerChoiceCtrl.Add( sbSizerDblCtrl, 1, wx.EXPAND, 5 )

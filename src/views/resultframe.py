@@ -22,14 +22,13 @@
 
 import wx
 import wx.animate
-
-
-########################################################################
+from src.modules import options
 
 class ResultFrame ( wx.Frame ):
 
     def __init__( self, parent ):
-        wx.Frame.__init__ ( self, parent, id = wx.ID_ANY, title = wx.EmptyString, size = wx.Size( 50,17 ), style = wx.NO_BORDER|wx.FRAME_NO_TASKBAR|wx.STAY_ON_TOP )
+        wx.Frame.__init__ ( self, parent, id = wx.ID_ANY, title = wx.EmptyString, size = wx.Size( 50,17 ),
+                            style = wx.NO_BORDER|wx.FRAME_NO_TASKBAR|wx.STAY_ON_TOP )
 
         cursor = wx.StockCursor(wx.CURSOR_HAND)
 
@@ -40,7 +39,8 @@ class ResultFrame ( wx.Frame ):
 
         bSizerText = wx.BoxSizer( wx.HORIZONTAL )
 
-        self.t_textCtrl = wx.TextCtrl( self, id=wx.ID_ANY, value=wx.EmptyString, style=wx.TE_MULTILINE|wx.TE_RICH|wx.NO_BORDER|wx.TRANSPARENT_WINDOW )
+        self.t_textCtrl = wx.TextCtrl( self, id=wx.ID_ANY, value=wx.EmptyString,
+                                       style=wx.TE_MULTILINE|wx.TE_RICH|wx.NO_BORDER|wx.TRANSPARENT_WINDOW )
         bSizerText.Add( self.t_textCtrl, 1, wx.ALL|wx.EXPAND, 5 )
 
         self.bSizer.Add( bSizerText, 7, wx.EXPAND, 0 )
@@ -58,7 +58,8 @@ class ResultFrame ( wx.Frame ):
         self.t_choiceLangFrom = wx.Choice( self, wx.ID_ANY, wx.DefaultPosition, wx.Size(90,-1), [], 0 )
         bSizerButtons.Add( self.t_choiceLangFrom, 0, wx.ALIGN_CENTER|wx.ALL, 6 )
 
-        self.t_bitmapArrow = wx.StaticBitmap( self, wx.ID_ANY, wx.Bitmap( u"./src/icons/popupframe/arrow_right_12x12.png",
+        self.t_bitmapArrow = wx.StaticBitmap( self, wx.ID_ANY, wx.Bitmap(
+            options.get_main_dir()+"/src/icons/popupframe/arrow_right_12x12.png",
                                                       wx.BITMAP_TYPE_ANY ), wx.DefaultPosition, wx.DefaultSize, 0 )
 
         bSizerButtons.Add( self.t_bitmapArrow, 0,wx.ALIGN_CENTER|wx.ALL, 6 )
@@ -69,14 +70,16 @@ class ResultFrame ( wx.Frame ):
         bSizerButtons.Add( self.t_choiceLangTo, 0, wx.ALIGN_CENTER|wx.ALL, 6 )
 
 
-        self.t_bitmapCopy = wx.StaticBitmap( self, wx.ID_ANY, wx.Bitmap( u"./src/icons/popupframe/clipboard_copy_icon&16.png",
+        self.t_bitmapCopy = wx.StaticBitmap( self, wx.ID_ANY, wx.Bitmap(
+            options.get_main_dir()+"/src/icons/popupframe/clipboard_copy_icon&16.png",
                                                          wx.BITMAP_TYPE_ANY ), wx.DefaultPosition, wx.DefaultSize, 0 )
         self.t_bitmapCopy.SetToolTipString( u"Copy text" )
         self.t_bitmapCopy.SetCursor(cursor)
 
         bSizerButtons.Add( self.t_bitmapCopy, 0,wx.ALIGN_CENTER|wx.ALL, 6 )
 
-        self.m_bitmapClose = wx.StaticBitmap( self, wx.ID_ANY, wx.Bitmap( u"./src/icons/popupframe/delete_icon&16.png",
+        self.m_bitmapClose = wx.StaticBitmap( self, wx.ID_ANY, wx.Bitmap(
+            options.get_main_dir()+"/src/icons/popupframe/delete_icon&16.png",
                                                       wx.BITMAP_TYPE_ANY ), wx.DefaultPosition, wx.DefaultSize, 0 )
         self.m_bitmapClose.SetToolTipString( u"Close" )
         self.m_bitmapClose.SetCursor(cursor)

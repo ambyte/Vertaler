@@ -65,7 +65,8 @@ class wxHTML(wx.html.HtmlWindow):
 class AboutFrame ( wx.Dialog ):
 
     def __init__(self, parent, title):
-        wx.Dialog.__init__ ( self, parent, id = wx.ID_ANY, title = title, pos = wx.DefaultPosition, size = wx.Size( 427,309 ), style = wx.DEFAULT_DIALOG_STYLE )
+        wx.Dialog.__init__ ( self, parent, id = wx.ID_ANY, title = title, pos = wx.DefaultPosition,
+                             size = wx.Size( 427,309 ), style = wx.DEFAULT_DIALOG_STYLE )
 
         self.SetSizeHintsSz( wx.DefaultSize, wx.DefaultSize )
 
@@ -73,7 +74,8 @@ class AboutFrame ( wx.Dialog ):
 
         bSizerHtmlWindow = wx.BoxSizer( wx.VERTICAL )
 
-        self.b_htmlWin = wxHTML( self, wx.ID_ANY, wx.DefaultPosition, wx.DefaultSize, wx.html.HW_NO_SELECTION|wx.html.HW_SCROLLBAR_AUTO )
+        self.b_htmlWin = wxHTML( self, wx.ID_ANY, wx.DefaultPosition, wx.DefaultSize,
+                                 wx.html.HW_NO_SELECTION|wx.html.HW_SCROLLBAR_AUTO )
         bSizerHtmlWindow.Add( self.b_htmlWin, 1, wx.ALL|wx.EXPAND, 5 )
 #        self.b_htmlWin.SetPage(page.decode("UTF-8"))
 

@@ -29,7 +29,8 @@ class SettingFrame ( wx.Dialog ):
 
     def __init__( self, parent ):
 
-        wx.Dialog.__init__ ( self, parent, id = wx.ID_ANY, title = _("Settings"), pos = wx.DefaultPosition, size = wx.Size( 590,400 ), style = wx.DEFAULT_DIALOG_STYLE )
+        wx.Dialog.__init__ ( self, parent, id = wx.ID_ANY, title = _("Settings"),
+                             pos = wx.DefaultPosition, size = wx.Size( 590,400 ), style = wx.DEFAULT_DIALOG_STYLE )
 
         self.SetSizeHintsSz( wx.DefaultSize, wx.DefaultSize )
 
@@ -63,7 +64,8 @@ class SettingFrame ( wx.Dialog ):
 
         sbSizerDblCtrl = wx.StaticBoxSizer( wx.StaticBox( self, wx.ID_ANY,  _("Use double Control") ), wx.VERTICAL )
 
-        self.s_checkBoxDblCtrl = wx.CheckBox( self, wx.ID_ANY,  _("Translate with double CTRL"), wx.DefaultPosition, wx.DefaultSize, 0 )
+        self.s_checkBoxDblCtrl = wx.CheckBox( self, wx.ID_ANY,  _("Translate with double CTRL"), wx.DefaultPosition,
+                                              wx.DefaultSize, 0 )
         sbSizerDblCtrl.Add( self.s_checkBoxDblCtrl, 0, wx.ALL, 5 )
 
         bSizerLeft.Add( sbSizerDblCtrl, 1, wx.EXPAND, 5 )
@@ -138,7 +140,8 @@ class SettingFrame ( wx.Dialog ):
 
         sbSizerUpdate = wx.StaticBoxSizer( wx.StaticBox( self, wx.ID_ANY, _("Check update setting") ), wx.VERTICAL )
 
-        self.s_checkBoxUpdate = wx.CheckBox( self, wx.ID_ANY, _("Check update on startup"), wx.DefaultPosition, wx.DefaultSize, 0 )
+        self.s_checkBoxUpdate = wx.CheckBox( self, wx.ID_ANY, _("Check update on startup"), wx.DefaultPosition,
+                                             wx.DefaultSize, 0 )
         sbSizerUpdate.Add( self.s_checkBoxUpdate, 0, wx.ALL, 5 )
 
         bSizerProxy.Add( sbSizerUpdate, 1, wx.EXPAND, 5 )

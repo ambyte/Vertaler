@@ -48,6 +48,7 @@ import locale
 import os
 import sys
 import gettext
+from src.modules import options
 
 OS_WINDOWS = (sys.platform == 'win32')
 
@@ -106,4 +107,4 @@ else:
     get_language  = get_language_other
 
 setup_env()
-gettext.install('messages',localedir='./src/locale',unicode=True)
+gettext.install('messages',localedir=options.get_main_dir()+"/src/locale",unicode=True)

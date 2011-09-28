@@ -22,6 +22,7 @@
 
 import wx
 import os
+from src.modules import options
 from src.modules import gettext_windows
 
 class MainTaskBarIcon(wx.TaskBarIcon):
@@ -30,9 +31,9 @@ class MainTaskBarIcon(wx.TaskBarIcon):
         wx.TaskBarIcon.__init__(self)
         self.parentApp = parent
         if os.name=="posix":
-            self.mainIcon = wx.Icon("./src/icons/appicons/app_icon_main24.png",wx.BITMAP_TYPE_PNG)
+            self.mainIcon = wx.Icon(options.get_main_dir()+"/src/icons/appicons/app_icon_main24.png",wx.BITMAP_TYPE_PNG)
         elif os.name=="nt":
-            self.mainIcon = wx.Icon("./src/icons/appicons/app_icon.ico",wx.BITMAP_TYPE_ICO)
+            self.mainIcon = wx.Icon(options.get_main_dir()+"/src/icons/appicons/app_icon.ico",wx.BITMAP_TYPE_ICO)
 
         self.create_menu()
         self.set_icon_image()
@@ -157,19 +158,22 @@ class MainFrame ( wx.Frame ):
 
         bSizer21 = wx.BoxSizer( wx.HORIZONTAL )
 
-        self.m_bpButtonClear = wx.BitmapButton( self, wx.ID_ANY, wx.Bitmap( u"./src/icons/mainframe/edit-clear-2.png",
+        self.m_bpButtonClear = wx.BitmapButton( self, wx.ID_ANY, wx.Bitmap(
+            options.get_main_dir()+"/src/icons/mainframe/edit-clear-2.png",
                                             wx.BITMAP_TYPE_ANY ), wx.DefaultPosition, wx.DefaultSize, wx.BU_AUTODRAW )
         self.m_bpButtonClear.SetToolTipString(_("Clear all"))
 
         bSizer21.Add( self.m_bpButtonClear, 0, wx.ALIGN_CENTER|wx.ALL, 5 )
 
-        self.m_bpButtonPaste = wx.BitmapButton( self, wx.ID_ANY, wx.Bitmap( u"./src/icons/mainframe/edit-paste-2.png",
+        self.m_bpButtonPaste = wx.BitmapButton( self, wx.ID_ANY, wx.Bitmap(
+            options.get_main_dir()+"/src/icons/mainframe/edit-paste-2.png",
                                             wx.BITMAP_TYPE_ANY ), wx.DefaultPosition, wx.DefaultSize, wx.BU_AUTODRAW )
         self.m_bpButtonPaste.SetToolTipString( _("Paste text from clipboard") )
 
         bSizer21.Add( self.m_bpButtonPaste, 0, wx.ALIGN_CENTER|wx.ALL, 5 )
 
-        self.m_bpButtonCopy = wx.BitmapButton( self, wx.ID_ANY, wx.Bitmap( u"./src/icons/mainframe/edit-copy-8.png",
+        self.m_bpButtonCopy = wx.BitmapButton( self, wx.ID_ANY, wx.Bitmap(
+            options.get_main_dir()+"/src/icons/mainframe/edit-copy-8.png",
                                             wx.BITMAP_TYPE_ANY ), wx.DefaultPosition, wx.DefaultSize, wx.BU_AUTODRAW )
         self.m_bpButtonCopy.SetToolTipString( _("Copy translated text") )
 
@@ -179,7 +183,8 @@ class MainFrame ( wx.Frame ):
                                             wx.LI_HORIZONTAL|wx.LI_VERTICAL )
         bSizer21.Add( self.m_staticline1, 0, wx.EXPAND |wx.ALL, 5 )
 
-        self.m_bpButtonTranslate = wx.BitmapButton( self, wx.ID_ANY, wx.Bitmap( u"./src/icons/mainframe/view-refresh-3.png",
+        self.m_bpButtonTranslate = wx.BitmapButton( self, wx.ID_ANY, wx.Bitmap(
+            options.get_main_dir()+"/src/icons/mainframe/view-refresh-3.png",
                                             wx.BITMAP_TYPE_ANY ), wx.DefaultPosition, wx.DefaultSize, wx.BU_AUTODRAW )
 
         self.m_bpButtonTranslate.SetToolTipString( _("Translate text") )
@@ -197,7 +202,8 @@ class MainFrame ( wx.Frame ):
 
         bSizer21.Add( self.m_choiceFrom, 0, wx.ALIGN_CENTER|wx.ALL, 5 )
 
-        self.m_bitmap1 = wx.StaticBitmap( self, wx.ID_ANY, wx.Bitmap( u"./src/icons/mainframe/go-next-3.png",
+        self.m_bitmap1 = wx.StaticBitmap( self, wx.ID_ANY, wx.Bitmap(
+            options.get_main_dir()+"/src/icons/mainframe/go-next-3.png",
                                                       wx.BITMAP_TYPE_ANY ), wx.DefaultPosition, wx.DefaultSize, 0 )
         bSizer21.Add( self.m_bitmap1, 0, wx.ALIGN_CENTER|wx.ALL, 5 )
 
@@ -209,14 +215,14 @@ class MainFrame ( wx.Frame ):
         bSizer21.Add( self.m_choiceTo, 0, wx.ALIGN_CENTER|wx.ALL, 5 )
 
         self.m_bpButtonLanguageSetting = wx.BitmapButton( self, wx.ID_ANY,
-                                            wx.Bitmap( u"./src/icons/mainframe/applications-development-translation.png",
+                    wx.Bitmap(options.get_main_dir()+"/src/icons/mainframe/applications-development-translation.png",
                                            wx.BITMAP_TYPE_ANY ), wx.DefaultPosition, wx.DefaultSize, wx.BU_AUTODRAW )
         self.m_bpButtonLanguageSetting.SetToolTipString( _("Open language settings") )
 
         bSizer21.Add( self.m_bpButtonLanguageSetting, 0, wx.ALIGN_CENTER|wx.ALL, 5 )
 
         self.m_bpButtonLanguageSave = wx.BitmapButton( self, wx.ID_ANY,
-                                                       wx.Bitmap( u"./src/icons/mainframe/document-export-2.png",
+                                wx.Bitmap( options.get_main_dir()+"/src/icons/mainframe/document-export-2.png",
                                                       wx.BITMAP_TYPE_ANY ), wx.DefaultPosition, wx.DefaultSize,
                                                        wx.BU_AUTODRAW )
         self.m_bpButtonLanguageSave.SetToolTipString( _("Save language settings") )
@@ -228,7 +234,7 @@ class MainFrame ( wx.Frame ):
         bSizer21.Add( self.m_staticline3, 0, wx.EXPAND |wx.ALL, 5 )
 
         self.m_bpButtonSettings = wx.BitmapButton( self, wx.ID_ANY,
-                                                   wx.Bitmap( u"./src/icons/mainframe/preferences-system-3.png",
+                            wx.Bitmap( options.get_main_dir()+"/src/icons/mainframe/preferences-system-3.png",
                                                       wx.BITMAP_TYPE_ANY ), wx.DefaultPosition, wx.DefaultSize,
                                                    wx.BU_AUTODRAW )
         self.m_bpButtonSettings.SetToolTipString( _("Open settings") )
@@ -253,7 +259,7 @@ class MainFrame ( wx.Frame ):
 
         self.m_statusBar1 = self.CreateStatusBar( 1, wx.ST_SIZEGRIP, wx.ID_ANY )
 
-        favicon = wx.Icon('./src/icons/appicons/app_icon.ico', wx.BITMAP_TYPE_ICO, 16, 16)
+        favicon = wx.Icon(options.get_main_dir()+"/src/icons/appicons/app_icon.ico", wx.BITMAP_TYPE_ICO, 16, 16)
         self.SetIcon(favicon)
 #        self.tbicon = MainTaskBarIcon(self)
 
