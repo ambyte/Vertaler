@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
-version=0.1
-visitedVersion=0.1
+version=0.2
+visitedVersion=0.2
 enableNotification=True
 countClickUp=0
 langList=['English','Russian']
