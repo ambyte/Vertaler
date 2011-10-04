@@ -122,7 +122,7 @@ class ControllerMain():
             self.dblCtrl+=1
             if self.dblCtrl==1: self.timeKeyUp = event.Time
             if options.useDblControl and self.dblCtrl==2:
-                if 200 > event.Time-self.timeKeyUp:
+                if 250 > event.Time-self.timeKeyUp:
                     self.dblCtrl=0
                     self.timeKeyUp=0
                     self.get_clipboard_data(True)
