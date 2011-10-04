@@ -24,7 +24,6 @@
 import re
 import httprequest
 import json
-from src.modules import options
 
 def translate_google(text, sourcelang="auto", targetlang="ru"):
     url = "http://www.google.com/translate_a/t?client=t"
@@ -45,7 +44,7 @@ def translate_google(text, sourcelang="auto", targetlang="ru"):
         try:
             # if many words
             if len(text.split(' '))>1:
-                for row in data[0]:
+                for row in data[2]:
                     resultData+=row[0]+" "
             else:
                 resultData=data[0][0][0]

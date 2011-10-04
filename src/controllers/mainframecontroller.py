@@ -248,6 +248,7 @@ class MainFrameController():
             self.view.m_menuItemNothing.Check(options.useNothing)
             self.view.m_menuItemDisableApp.Check(not options.enableApp)
         self.isTbicon=False
+        self.settings.set_global_params()
 
     def check_press(self,msg):
         """
