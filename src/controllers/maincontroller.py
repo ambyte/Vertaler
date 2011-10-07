@@ -59,7 +59,6 @@ class ControllerMain():
         options.isRunTranslate=False
         self.ctrlPressed=False
         self.getClip=True
-        self.mainFrame.view.Bind(wx.EVT_CLOSE,self.event_exit)
         self.mainFrame.view.Bind( wx.EVT_MENU,self.event_exit, self.mainFrame.view.m_menuItemExit  )
         self.mainFrame.tbicon.Bind(wx.EVT_MENU, self.event_exit, id=wx.ID_EXIT)
         self.hm = hooklib.HookManager()

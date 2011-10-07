@@ -61,6 +61,8 @@ class MainFrameController():
          self.isMenu=False
          self.isTbicon=False
 
+         self.view.Bind(wx.EVT_CLOSE,self.event_hide)
+
          self.view.m_menuItemCtrl.Check(options.useControl)
          self.view.m_menuItemNothing.Check(options.useNothing)
 
