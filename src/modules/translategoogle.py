@@ -51,12 +51,10 @@ def translate_google(text, sourcelang="auto", targetlang="ru"):
                 if not type(data[1]) is unicode:
                     resultData += '\n----\n'
                     for row in data[1][0][1]:
-                        if data[1][0][1][len(data[1][0][1])-1] == row:
-                            resultData +=u"%s " % row
-                        else:
-                            resultData +=u"%s " % row
+                        resultData +=u"%s " % row
         except Exception:
             pass
+        resultData=resultData.replace(" ,",",")
         return resultData
     except Exception, e:
         return _("Sorry, Can't connect to the server!")
