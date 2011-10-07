@@ -30,6 +30,7 @@ from src.modules.options import langForTran
 from src.modules import options
 if os.name =="nt":
     import win32gui
+    from src.modules import clipboardlib
 elif os.name =="posix":
     from Xlib import display
 from wx.lib.pubsub import Publisher as pub
@@ -75,6 +76,8 @@ class ResultController:
 #            print "show resultframe"
             self.start_translate(options.defaultLangFrom,options.defaultLangTo)
         else:
+            if os.name =="nt":
+                clipboardlib.event_press_ctrl()
             options.isRunTranslate=False
 
     def start_translate(self,langFrom,langTo):

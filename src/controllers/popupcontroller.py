@@ -28,6 +28,7 @@ import sys
 import os
 if os.name =="nt":
     import win32gui
+    from src.modules import clipboardlib
 elif os.name =="posix":
     from Xlib import display
 from wx.lib.pubsub import Publisher as pub
@@ -98,6 +99,8 @@ class PopUpController:
             self.view.Move((x,y-10))
             self.timer.Start(3000)
         else:
+            if os.name =="nt":
+                clipboardlib.event_press_ctrl()
             options.isRunTranslate=False
 
     def on_timer(self, event):

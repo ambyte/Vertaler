@@ -118,6 +118,10 @@ def event_clipboard(self):
     win32api.keybd_event (ord('C'), 0, win32con.KEYEVENTF_KEYUP, 0)
     time.sleep(0.05)
 
+def event_press_ctrl():
+    win32api.keybd_event(win32con.VK_CONTROL, 0, 0, 0)
+    win32api.keybd_event (win32con.VK_CONTROL, 0, win32con.KEYEVENTF_KEYUP, 0)
+
 def run_clipboard(self):
     save_clipboard(self)
     empty_clipboard(self)

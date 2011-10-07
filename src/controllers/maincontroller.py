@@ -249,9 +249,6 @@ class ControllerMain():
                 self.popUpFrame.view.Show()
             finally:
                 restore_clipboard(self)
-                if hooklib.GetKeyState(hooklib.HookConstants.VKeyToID('VK_CONTROL')):
-                    win32api.keybd_event(win32con.VK_CONTROL, 0, 0, 0)
-                    win32api.keybd_event (win32con.VK_CONTROL, 0, win32con.KEYEVENTF_KEYUP, 0)
                 self.hm.HookKeyboard()
 
     def version_result(self, msg):
