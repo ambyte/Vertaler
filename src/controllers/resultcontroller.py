@@ -31,6 +31,7 @@ from src.modules import options
 if os.name =="nt":
     import win32gui
     from src.modules import clipboardlib
+    from src.modules import replacetext
 elif os.name =="posix":
     from Xlib import display
 from wx.lib.pubsub import Publisher as pub
@@ -57,6 +58,7 @@ class ResultController:
          self.view.t_choiceLangFrom.Bind( wx.EVT_KILL_FOCUS, self.event_deselect_lang )
 
          self.view.t_bitmapCopy.Bind( wx.EVT_LEFT_DOWN, self.event_copy )
+         self.view.t_bitmapReplace.Bind( wx.EVT_LEFT_DOWN, self.event_replace )
          self.view.m_bitmapClose.Bind( wx.EVT_LEFT_DOWN, self.event_close )
          self.view.Bind( wx.EVT_SHOW, self.event_show )
          self.view.Bind(wx.EVT_LEFT_DOWN, self.on_mouse_left_down)
@@ -130,6 +132,7 @@ class ResultController:
         hide controls when start translate
         """
         self.view.ag.Show(True)
+        self.view.t_bitmapReplace.Hide()
         self.view.t_textCtrl.Hide()
         self.view.t_choiceLangFrom.Hide()
         self.view.t_bitmapArrow.Hide()
@@ -143,6 +146,7 @@ class ResultController:
         """
 #        print "show controls"
         self.view.t_textCtrl.Show(True)
+        self.view.t_bitmapReplace.Show(True)
         self.view.t_bitmapArrow.Show(True)
         self.view.t_choiceLangFrom.Show(True)
         self.view.t_choiceLangTo.Show(True)
@@ -189,9 +193,9 @@ class ResultController:
         set frame size
         """
         if '----' in dataText:
-            self.view.SetSize((285,100+len(dataText)*0.2))
+            self.view.SetSize((315,100+len(dataText)*0.2))
         elif len(dataText)<=1500:
-            width=285+len(dataText)/2.5
+            width=315+len(dataText)/2.5
             height=80+len(dataText)*0.2
             if width>500: width=500
             if height>400:height=400
@@ -267,6 +271,16 @@ class ResultController:
             wx.MessageBox(_("Unable to open the clipboard"), _("Error"))
         options.isRunTranslate=False
         self.view.Hide()
+
+    def event_replace( self, event ):
+        """
+        copy translated text
+        """
+        self.view.Hide()
+        time.sleep(0.5)
+#        replacetext.ReplaceText(self.translatedText)
+        options.isRunTranslate=False
+
 
     def event_close( self, event ):
         """
