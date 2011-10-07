@@ -55,7 +55,7 @@ class SettingFrameForPosix ( wx.Dialog ):
 
         bSizerChoiceCtrl = wx.BoxSizer( wx.HORIZONTAL )
 
-        sbSizerSearch = wx.StaticBoxSizer( wx.StaticBox( self, wx.ID_ANY, _("Choise search services") ), wx.HORIZONTAL )
+        sbSizerSearch = wx.StaticBoxSizer( wx.StaticBox( self, wx.ID_ANY, _("Choose search services") ), wx.HORIZONTAL )
 
         self.s_choiceSearch = wx.Choice( self, wx.ID_ANY, wx.DefaultPosition, wx.Size( 150,-1 ),
                                          options.searchEngines, 0 )

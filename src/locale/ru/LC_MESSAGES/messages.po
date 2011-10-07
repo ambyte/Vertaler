@@ -220,7 +220,7 @@ msgstr "Доступна новая версия программы"
 msgid "you can download and install it"
 msgstr "вы можете скачать и установить ее"
 
-msgid "Choise search service"
+msgid "Choose search service"
 msgstr "Выберите сервис поиска"
 
 msgid "Use double Control"

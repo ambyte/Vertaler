@@ -55,7 +55,7 @@ class SettingFrame ( wx.Dialog ):
 
         bSizerLeft.Add( sbSizerRadioButtons, 4, wx.EXPAND, 5 )
 
-        sbSizerSearch = wx.StaticBoxSizer( wx.StaticBox( self, wx.ID_ANY, _("Choise search service") ), wx.VERTICAL )
+        sbSizerSearch = wx.StaticBoxSizer( wx.StaticBox( self, wx.ID_ANY, _("Choose search service") ), wx.VERTICAL )
 
         self.s_choiceSearch = wx.Choice( self, wx.ID_ANY, wx.DefaultPosition, wx.DefaultSize, options.searchEngines, 0 )
         sbSizerSearch.Add( self.s_choiceSearch, 1, wx.ALL|wx.EXPAND, 5 )
