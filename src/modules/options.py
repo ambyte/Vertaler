@@ -1,4 +1,5 @@
 # -*- coding: utf-8 -*-
+
 version=0.2
 visitedVersion=0.2
 enableNotification=True
