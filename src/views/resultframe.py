@@ -77,14 +77,6 @@ class ResultFrame ( wx.Frame ):
         self.t_bitmapCopy.SetCursor(cursor)
         bSizerButtons.Add( self.t_bitmapCopy, 0,wx.ALIGN_CENTER|wx.ALL, 6 )
 
-        self.t_bitmapReplace = wx.StaticBitmap( self, wx.ID_ANY, wx.Bitmap(
-            options.get_main_dir()+"/src/icons/popupframe/download_icon&16.png",
-                                                         wx.BITMAP_TYPE_ANY ), wx.DefaultPosition, wx.DefaultSize, 0 )
-        self.t_bitmapReplace.SetToolTipString( u"Replace text" )
-        self.t_bitmapReplace.SetCursor(cursor)
-        bSizerButtons.Add( self.t_bitmapReplace, 0,wx.ALIGN_CENTER|wx.ALL, 6 )
-
-
         self.m_bitmapClose = wx.StaticBitmap( self, wx.ID_ANY, wx.Bitmap(
             options.get_main_dir()+"/src/icons/popupframe/delete_icon&16.png",
                                                       wx.BITMAP_TYPE_ANY ), wx.DefaultPosition, wx.DefaultSize, 0 )
