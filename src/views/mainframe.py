@@ -82,30 +82,31 @@ class MainFrame ( wx.Frame ):
 
         self.m_menubar = wx.MenuBar( 0 )
         self.m_menu_file = wx.Menu()
-        self.m_menuItemSettings = wx.MenuItem( self.m_menu_file, wx.ID_ANY, _("Settings") + "\t" + u"Alt+S",
+        self.m_menuItemSettings = wx.MenuItem( self.m_menu_file, wx.ID_ANY, _("Settings"),
                                                _("Program settings"), wx.ITEM_NORMAL )
         self.m_menu_file.AppendItem( self.m_menuItemSettings )
 
         self.m_menu_file.AppendSeparator()
 
-        self.m_menuItemExit = wx.MenuItem( self.m_menu_file, wx.ID_ANY, _("Exit"), _("Close"), wx.ITEM_NORMAL )
+        self.m_menuItemExit = wx.MenuItem( self.m_menu_file, wx.ID_ANY, _("Exit"), _("Close"),
+            wx.ITEM_NORMAL )
         self.m_menu_file.AppendItem( self.m_menuItemExit )
 
         self.m_menubar.Append( self.m_menu_file, _("Main") )
 
         self.m_menuEdit = wx.Menu()
 
-        self.m_menuItemClear = wx.MenuItem( self.m_menuEdit, wx.ID_ANY, _("Clear")+ u"\t" + u"Ctrl+N",
+        self.m_menuItemClear = wx.MenuItem( self.m_menuEdit, wx.ID_ANY, _("Clear"),
                                             _("Clear forms"), wx.ITEM_NORMAL )
         self.m_menuEdit.AppendItem( self.m_menuItemClear )
 
         self.m_menuEdit.AppendSeparator()
 
-        self.m_menuItemCopy = wx.MenuItem( self.m_menuEdit, wx.ID_ANY, _("Copy")+ u"\t" + u"Ctrl+C",
+        self.m_menuItemCopy = wx.MenuItem( self.m_menuEdit, wx.ID_ANY, _("Copy"),
                                            _("Copy text"), wx.ITEM_NORMAL )
         self.m_menuEdit.AppendItem( self.m_menuItemCopy )
 
-        self.m_menuItemPaste = wx.MenuItem( self.m_menuEdit, wx.ID_ANY, _("Paste")+ u"\t" + u"Ctrl+V",
+        self.m_menuItemPaste = wx.MenuItem( self.m_menuEdit, wx.ID_ANY, _("Paste"),
                                             _("Paste text"), wx.ITEM_NORMAL )
         self.m_menuEdit.AppendItem( self.m_menuItemPaste )
 
