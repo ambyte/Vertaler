@@ -141,9 +141,11 @@ class MainFrameController():
 
         if os.name =="nt":
             self.view.Hide()
+            self.clear_text_ctrl()
         else:
             if not self.isShow:
                 self.view.Hide()
+                self.clear_text_ctrl()
             self.isShow=False
 
 
@@ -188,6 +190,12 @@ class MainFrameController():
         self.view.m_bpButtonLanguageSave.Enable(False)
 
     def event_clear( self, event ):
+        """
+        Event for clear textCtrl
+        """
+        self.clear_text_ctrl()
+
+    def clear_text_ctrl(self):
         """
         Clear textCtrl
         """
