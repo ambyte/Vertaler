@@ -235,6 +235,4 @@ msgstr "Настройки проверки обновления"
 msgid "Sorry, an error occurred"
 msgstr "Извините, возникла ошибка"
 
-msgid "Replace text"
-msgstr "Заменить текст"
 
