@@ -47,10 +47,15 @@ class MainTaskBarIcon(wx.TaskBarIcon):
         self.menuItemCtrl = wx.MenuItem( self.menu, wx.ID_ANY, _("With CTRL press") , kind=wx.ITEM_RADIO )
         self.menuItemNothing = wx.MenuItem( self.menu, wx.ID_ANY, _("Nothing press"), kind=wx.ITEM_RADIO )
         self.menuDisableApp = wx.MenuItem( self.menu, wx.ID_ANY, _("Disable Application"), kind=wx.ITEM_RADIO )
+        self.menuUseGoogle = wx.MenuItem( self.menu, wx.ID_ANY, "Google", kind=wx.ITEM_RADIO )
+        self.menuUseBing = wx.MenuItem( self.menu, wx.ID_ANY, "Bing", kind=wx.ITEM_RADIO )
         self.menu.AppendItem(self.menuItemDblCtrl)
         self.menu.AppendItem(self.menuItemCtrl)
         self.menu.AppendItem(self.menuItemNothing)
         self.menu.AppendItem(self.menuDisableApp)
+        self.menu.AppendSeparator()
+        self.menu.AppendItem(self.menuUseGoogle)
+        self.menu.AppendItem(self.menuUseBing)
         self.menu.AppendSeparator()
         self.menu.AppendItem(self.menuSetting)
         self.menu.AppendItem(self.menuAbout)
@@ -120,10 +125,20 @@ class MainFrame ( wx.Frame ):
         self.m_menuItemNothing = wx.MenuItem( self.m_menuFastSetting, wx.ID_ANY, _("Nothing press"),
                                               _("Translate with nothing press button"), wx.ITEM_RADIO )
         self.m_menuFastSetting.AppendItem( self.m_menuItemNothing )
-
         self.m_menuItemDisableApp = wx.MenuItem( self.m_menuFastSetting, wx.ID_ANY, _("Disable Application"),
-                                              _("Disable Application"), wx.ITEM_RADIO )
+            _("Disable Application"), wx.ITEM_RADIO )
         self.m_menuFastSetting.AppendItem( self.m_menuItemDisableApp )
+        self.m_menuFastSetting.AppendSeparator()
+
+        self.m_menuItemGoogle = wx.MenuItem( self.m_menuFastSetting, wx.ID_ANY, "Google",
+            _("Disable Application"), wx.ITEM_RADIO )
+        self.m_menuFastSetting.AppendItem( self.m_menuItemGoogle )
+        self.m_menuItemBing = wx.MenuItem( self.m_menuFastSetting, wx.ID_ANY, "Bing",
+            _("Disable Application"), wx.ITEM_RADIO )
+        self.m_menuFastSetting.AppendItem( self.m_menuItemBing )
+
+        self.m_menuFastSetting.AppendSeparator()
+
 
         if os.name =="nt":
             self.m_menuItemStartUpLoad = wx.MenuItem( self.m_menuFastSetting, wx.ID_ANY, _("Load programm on startup"),

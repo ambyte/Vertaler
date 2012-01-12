@@ -65,10 +65,15 @@ class MainFrameController():
 
          self.view.m_menuItemCtrl.Check(options.useControl)
          self.view.m_menuItemNothing.Check(options.useNothing)
+         self.view.m_menuItemBing.Check(options.useBing)
+         self.view.m_menuItemGoogle.Check(options.useGoogle)
 
          self.tbicon.menuItemCtrl.Check(options.useControl)
          self.tbicon.menuItemNothing.Check(options.useNothing)
          self.tbicon.menuItemDblCtrl.Check(options.useDblControl)
+
+         self.tbicon.menuUseBing.Check(options.useBing)
+         self.tbicon.menuUseGoogle.Check(options.useGoogle)
 
          # Connect TaskBar Events
          wx.EVT_TASKBAR_LEFT_DCLICK(self.tbicon, self.event_restore_window)
@@ -78,6 +83,8 @@ class MainFrameController():
          self.tbicon.Bind( wx.EVT_MENU,self.event_check_press_tbicon, self.tbicon.menuItemCtrl  )
          self.tbicon.Bind( wx.EVT_MENU,self.event_check_press_tbicon, self.tbicon.menuItemNothing  )
          self.tbicon.Bind( wx.EVT_MENU,self.event_check_press_tbicon, self.tbicon.menuDisableApp  )
+         self.tbicon.Bind( wx.EVT_MENU,self.event_tbicon_services, self.tbicon.menuUseBing  )
+         self.tbicon.Bind( wx.EVT_MENU,self.event_tbicon_services, self.tbicon.menuUseGoogle  )
          self.view.Bind(wx.EVT_ICONIZE, self.event_hide)
 
          # Connect Menu events
@@ -91,6 +98,8 @@ class MainFrameController():
          self.view.Bind( wx.EVT_MENU,self.event_check_press_menu, self.view.m_menuItemCtrl  )
          self.view.Bind( wx.EVT_MENU,self.event_check_press_menu, self.view.m_menuItemNothing  )
          self.view.Bind( wx.EVT_MENU,self.event_check_press_menu, self.view.m_menuItemDisableApp  )
+         self.view.Bind( wx.EVT_MENU,self.event_check_press_services, self.view.m_menuItemBing  )
+         self.view.Bind( wx.EVT_MENU,self.event_check_press_services, self.view.m_menuItemGoogle  )
          if os.name =="nt":
             self.view.Bind( wx.EVT_MENU,self.event_setting_start_up, self.view.m_menuItemStartUpLoad  )
 
@@ -260,6 +269,38 @@ class MainFrameController():
         self.isTbicon=False
         self.settings.set_global_params()
 
+    def event_tbicon_services(self,event):
+        """
+        change translate service
+        """
+#        TODO проверить работу в Linux
+        if self.tbicon.menuUseBing.IsChecked():
+            options.useGoogle=False
+            options.useBing=True
+            self.view.m_menuItemBing.Check(options.useBing)
+            self.view.m_menuItemGoogle.Check(options.useGoogle)
+        else:
+            options.useGoogle=True
+            options.useBing=False
+            self.view.m_menuItemBing.Check(options.useBing)
+            self.view.m_menuItemGoogle.Check(options.useGoogle)
+
+
+    def event_check_press_services(self,event):
+        """
+        change translate service
+        """
+        if self.view.m_menuItemBing.IsChecked():
+            options.useGoogle=False
+            options.useBing=True
+            self.tbicon.menuUseBing.Check(options.useBing)
+            self.tbicon.menuUseGoogle.Check(options.useGoogle)
+        else:
+            options.useGoogle=True
+            options.useBing=False
+            self.tbicon.menuUseBing.Check(options.useBing)
+            self.tbicon.menuUseGoogle.Check(options.useGoogle)
+
     def check_press(self,msg):
         """
         if change params in setting frame
@@ -267,11 +308,15 @@ class MainFrameController():
         self.isSaveSetting=True
         if os.name =="nt":
             self.view.m_menuItemStartUpLoad.Check(options.startWithOS)
+        self.view.m_menuItemBing.Check(options.useBing)
         self.view.m_menuItemCtrl.Check(options.useControl)
         self.view.m_menuItemNothing.Check(options.useNothing)
+        self.view.m_menuItemGoogle.Check(options.useGoogle)
         self.tbicon.menuItemCtrl.Check(options.useControl)
         self.tbicon.menuItemNothing.Check(options.useNothing)
         self.tbicon.menuItemDblCtrl.Check(options.useDblControl)
+        self.tbicon.menuUseBing.Check(options.useBing)
+        self.tbicon.menuUseGoogle.Check(options.useGoogle)
         self.isSaveSetting=False
 
     def event_setting_start_up( self, event ):
