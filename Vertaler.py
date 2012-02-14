@@ -2,11 +2,10 @@
 
 
 import wx
-import os
+
 
 from src.controllers.maincontroller import ControllerMain
-if os.name=="nt":
-    from wx.lib.pubsub import setupv1
+from wx.lib.pubsub import setuparg1
 
 
 class MainApp(wx.App):

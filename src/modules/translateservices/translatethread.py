@@ -27,11 +27,11 @@ import wx
 import time
 
 from threading import Thread
-from wx.lib.pubsub import Publisher as pub
-from src.modules import options
-from src.modules.options import langForTran
-from src.modules.translatebing import Translator
-from src.modules.translategoogle import translate_google
+from wx.lib.pubsub import pub
+from src.modules.settings.options import langForTran
+from src.modules.settings import options
+from src.modules.translateservices.translatebing import Translator
+from src.modules.translateservices.translategoogle import translate_google
 
 class TranslateThread(Thread):
     """Thread Class."""
@@ -50,6 +50,7 @@ class TranslateThread(Thread):
     def run(self):
         """Run Worker Thread."""
 #        options.isRunTranslate=False
+        publisher = pub.Publisher()
         result=[]
         try:
             if self.sourceLang=="auto": self.sourceLang=None
@@ -79,12 +80,12 @@ class TranslateThread(Thread):
 #            print result[1]
             time.sleep(0.1)
             if not self.mainTranslate:
-                wx.CallAfter(pub.sendMessage,"TRANSLATE", result)
+                wx.CallAfter(publisher.sendMessage,"TRANSLATE", result)
             else:
-                wx.CallAfter(pub.sendMessage,"MAINTRANSLATE", result)
+                wx.CallAfter(publisher.sendMessage,"MAINTRANSLATE", result)
         except Exception:
             result=("",self.countRunTranslator,"Sorry, an error occurred")
             if not self.mainTranslate:
-                wx.CallAfter(pub.sendMessage,"TRANSLATE", result)
+                wx.CallAfter(publisher.sendMessage,"TRANSLATE", result)
             else:
-                wx.CallAfter(pub.sendMessage,"MAINTRANSLATE", result)
+                wx.CallAfter(publisher.sendMessage,"MAINTRANSLATE", result)

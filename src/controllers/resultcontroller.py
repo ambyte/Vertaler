@@ -22,24 +22,24 @@
 
 """ Controller for ResultFrame """
 import os
-import time
 import wx
+from src.modules.settings import options
+from src.modules.translateservices import translatethread
 from src.views.resultframe import ResultFrame
-from src.modules  import translatethread
-from src.modules.options import langForTran
-from src.modules import options
+from src.modules.settings.options import langForTran
+
 if os.name =="nt":
     import win32gui
     from src.modules import clipboardlib
 elif os.name =="posix":
     from Xlib import display
-from wx.lib.pubsub import Publisher as pub
-from src.modules import gettext_windows
+from wx.lib.pubsub import pub
 
 
 class ResultController:
 
     def __init__(self):
+         publisher = pub.Publisher()
          self.view = ResultFrame(None)
          self.showResult=False
          self.view.ag.Show(True)
@@ -61,7 +61,7 @@ class ResultController:
          self.view.Bind( wx.EVT_SHOW, self.event_show )
          self.view.Bind(wx.EVT_LEFT_DOWN, self.on_mouse_left_down)
          self.view.Bind(wx.EVT_MOTION, self.event_motion)
-         pub.subscribe(self.update_display, "TRANSLATE")
+         publisher.subscribe(self.update_display, "TRANSLATE")
 
     def event_show(self, event):
         """
@@ -74,7 +74,7 @@ class ResultController:
             self.view.SetFocus()
             self.showResult=True
 #            print "show resultframe"
-            self.start_translate(options.defaultLangFrom,options.defaultLangTo)
+            self.start_translate(options.defaultLangFrom, options.defaultLangTo)
         else:
             if os.name =="nt":
                 clipboardlib.event_press_ctrl()

@@ -19,14 +19,14 @@
 # along with this program; if not, write to the Free Software
 # Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA 02110-1301, USA.
 # ----------------------------------------------------------------------------
+from src.modules.settings import options
 
-import requests
-from src.modules import options
+from src.packages import requests
 
 class HttpRequest():
     def __init__(self):
         if options.useProxy:
-            proxy = options.proxyAddress+":"+options.proxyPort
+            proxy = options.proxyAddress+":"+ options.proxyPort
             user = options.proxyLogin
             password = options.proxyPassword
             self.proxies={'proxy':proxy,'user':user,'password':password}

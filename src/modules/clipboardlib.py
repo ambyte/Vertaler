@@ -38,8 +38,6 @@ def save_clipboard(self):
             self.cbSaved = {}
             rval = win32clipboard.EnumClipboardFormats( 0 )
             while rval:
-                #print "Retrieving CB format %d" % rval
-#                dat = win32clipboard.GetClipboardData( rval )
                 win32clipboard.GetClipboardData( rval )
                 if rval == 15:  #CF_HDROP
                     #this'll error, so just give up
@@ -111,6 +109,7 @@ def empty_clipboard(self):
     return True
 
 def event_clipboard(self):
+#    TODO если контрол нажат, то что-то сделать
     time.sleep(0.05)
     win32api.keybd_event(win32con.VK_CONTROL, 0, 0, 0)
     win32api.keybd_event(ord('C'), 0, win32con.KEYEVENTF_EXTENDEDKEY | 0, 0)

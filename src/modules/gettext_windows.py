@@ -48,7 +48,7 @@ import locale
 import os
 import sys
 import gettext
-from src.modules import options
+from src.modules.settings import options
 
 OS_WINDOWS = (sys.platform == 'win32')
 

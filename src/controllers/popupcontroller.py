@@ -24,20 +24,17 @@
 
 import webbrowser
 import wx
-import sys
 import os
+from src.modules.settings import options
+
 if os.name =="nt":
     import win32gui
     from src.modules import clipboardlib
 elif os.name =="posix":
     from Xlib import display
-from wx.lib.pubsub import Publisher as pub
+from wx.lib.pubsub import pub
 from src.views.popupframe import PopUpFrame
 from src.controllers.resultcontroller import ResultController
-
-
-from src.modules import gettext_windows, options
-
 
 
 class PopUpController:
@@ -181,7 +178,8 @@ class PopUpController:
         """
         Open MainFrame and send selected text
         """
-        pub.sendMessage("GO HOME",self.dataText)
+        publisher = pub.Publisher()
+        publisher.sendMessage("GO HOME",self.dataText)
         options.isRunTranslate=False
         self.view.Hide()
 

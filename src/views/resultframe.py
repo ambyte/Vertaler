@@ -22,7 +22,7 @@
 
 import wx
 import wx.animate
-from src.modules import options
+from src.modules.settings import options
 
 class ResultFrame ( wx.Frame ):
 

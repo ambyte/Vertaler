@@ -25,13 +25,12 @@
 import os
 import wx
 from src.views.settingframe import SettingFrame
-import src.modules.options as options
+import src.modules.settings.options as options
 from src.views.settingframeforposix import SettingFrameForPosix
 
 if os.name =="nt":
     from src.modules import startupapp
-from wx.lib.pubsub import Publisher as pub
-from src.modules import gettext_windows
+from wx.lib.pubsub import pub
 
 class SettingController:
     def __init__(self):
@@ -49,15 +48,15 @@ class SettingController:
         if options.useBing:
             self.view.s_radioBox2.SetSelection(0)
 
-        self.view.s_choiceSearch.Selection=options.defaultSearchEngine
+        self.view.s_choiceSearch.Selection= options.defaultSearchEngine
         self.view.s_checkBoxDblCtrl.SetValue(options.useDblControl)
         if os.name =="nt":
             self.view.s_checkBoxStartWithWin.SetValue(options.startWithOS)
             self.view.s_checkBoxUseProxy.SetValue(options.useProxy)
-            self.view.s_textCtrlAddress.Value=options.proxyAddress
-            self.view.s_textCtrlPort.Value=options.proxyPort
-            self.view.s_textCtrlLogin.Value=options.proxyLogin
-            self.view.s_textCtrlPass.Value=options.proxyPassword
+            self.view.s_textCtrlAddress.Value= options.proxyAddress
+            self.view.s_textCtrlPort.Value= options.proxyPort
+            self.view.s_textCtrlLogin.Value= options.proxyLogin
+            self.view.s_textCtrlPass.Value= options.proxyPassword
             self.view.s_checkBoxUpdate.SetValue(options.enableNotification)
 
         # Connect Events
@@ -71,6 +70,7 @@ class SettingController:
         self.view.Close()
 
     def event_save( self, event ):
+        publisher = pub.Publisher()
         if os.name =="nt" and self.view.s_checkBoxUseProxy.GetValue():
             if self.view.s_textCtrlPort.Value=="" and self.view.s_textCtrlAddress.Value=="":
                 self.view.s_staticTextMessage.Label=_("Inter address and port for proxy")
@@ -109,7 +109,7 @@ class SettingController:
             options.startWithOS=self.view.s_checkBoxStartWithWin.GetValue()
             self.start_with_os()
 
-        pub.sendMessage("SAVE SETTINGS")
+        publisher.sendMessage("SAVE SETTINGS")
         self.view.Close()
 
     def start_with_os(self):

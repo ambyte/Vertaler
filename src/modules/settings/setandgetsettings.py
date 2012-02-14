@@ -24,7 +24,7 @@
 
 import wx
 import cPickle
-from src.modules import options
+from src.modules.settings import options
 
 class Settings():
     def __init__(self):

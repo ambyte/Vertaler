@@ -23,8 +23,7 @@
 """ Notification about new version """
 import webbrowser
 import wx
-from src.modules import options
-from src.modules import gettext_windows
+from src.modules.settings import options
 
 class NotificationFrame ( wx.Frame ):
 

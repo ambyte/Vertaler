@@ -22,25 +22,23 @@
 
 """ Controller for MainFrame """
 import os
-import sys
-import webbrowser
 import wx
+from src.modules.settings import setandgetsettings, options
+from src.modules.translateservices import translatethread
 
 if os.name =="nt":
     from src.modules import startupapp
-from wx.lib.pubsub import Publisher as pub
-from src.modules import setandgetsettings
+from wx.lib.pubsub import pub
 from src.views.mainframe import MainFrame, MainTaskBarIcon
 from src.controllers import settinglangcontroller , aboutcontroller, settingcontroller
-from src.modules  import translatethread
 from src.modules import options
-from src.modules.options import langForTran
-from src.modules import gettext_windows
+from src.modules.settings.options import langForTran
 
 
 class MainFrameController():
 
     def __init__(self):
+         publisher = pub.Publisher()
          self.view = MainFrame(None)
          self.settings = setandgetsettings.Settings()
          if os.name =="nt":
@@ -52,10 +50,10 @@ class MainFrameController():
          self.isShow=False
          self.langSetting = settinglangcontroller.SettingLangController()
          self.tbicon = MainTaskBarIcon(self)
-         pub.subscribe(self.set_lang_for_use, "SAVE LANG")
-         pub.subscribe(self.open_text_in_mainframe, "GO HOME")
-         pub.subscribe(self.translate_result, "MAINTRANSLATE")
-         pub.subscribe(self.check_press,"SAVE SETTINGS")
+         publisher.subscribe(self.set_lang_for_use, "SAVE LANG")
+         publisher.subscribe(self.open_text_in_mainframe, "GO HOME")
+         publisher.subscribe(self.translate_result, "MAINTRANSLATE")
+         publisher.subscribe(self.check_press,"SAVE SETTINGS")
          self.set_lang_for_use(1)
          self.isSaveSetting=False
          self.isMenu=False
@@ -178,7 +176,7 @@ class MainFrameController():
         """
         self.isShow=True
         if not self.view.IsShown():
-            self.view.Show(True)
+            self.view.Show()
             self.view.Restore()
             self.view.Centre()
 
@@ -192,9 +190,9 @@ class MainFrameController():
         if not item:
             options.defaultLangFrom='Auto'
         else:
-            options.defaultLangFrom=options.langList[item-1]
+            options.defaultLangFrom= options.langList[item-1]
         item = self.view.m_choiceTo.GetSelection()
-        options.defaultLangTo=options.langList[item]
+        options.defaultLangTo= options.langList[item]
         self.settings.save_lang_param()
         self.view.m_bpButtonLanguageSave.Enable(False)
 

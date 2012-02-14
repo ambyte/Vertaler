@@ -22,8 +22,8 @@
 
 
 import re
-import httprequest
 import json
+from src.modules import httprequest
 
 def translate_google(text, sourcelang="auto", targetlang="ru"):
     url = "http://www.google.com/translate_a/t?client=t"

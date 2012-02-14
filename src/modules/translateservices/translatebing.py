@@ -22,9 +22,9 @@
 
 """ A translator using the micrsoft translation engine """
 
-import httprequest
+#from src.packages import requests
 import json
-from src.modules import gettext_windows
+from src.modules import gettext_windows, httprequest
 
 class Translator(object):
     """Implements AJAX API for the Microsoft Translator service
@@ -40,14 +40,13 @@ class Translator(object):
 
     def call(self, url, params):
         """Calls the given url with the params urlencoded """
-        rv=''
         try:
             params['appId'] = self.app_id
             request=httprequest.HttpRequest()
             response=request.http_request(url,params=params,method='GET')
             rv =  json.loads(response.decode("UTF-8-sig"))
             return rv
-        except Exception, e:
+        except Exception:
             return _("Sorry, Can't connect to the server!")
 
 

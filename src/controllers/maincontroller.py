@@ -20,119 +20,61 @@
 # Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA 02110-1301, USA.
 # ----------------------------------------------------------------------------
 
-""" Main Controller
- get selection text use clipboard for os windows"""
+""" Start main frame, processing selected text for translating """
 
 import os
 import wx
+import sys
+import time
+from src.modules.settings import options
+from wx.lib.pubsub import pub
+from src.controllers.mainframecontroller import MainFrameController
+from src.controllers.popupcontroller import PopUpController
+from src.modules.globalevents.handler_global_event import HandlerGlobalEvents
+from src.views import notification
+
 if os.name =="posix":
     from posix import popen
-    from src.modules import pyxhook as hooklib
 elif os.name =="nt":
     from src.modules.clipboardlib import restore_clipboard, run_clipboard
     from src.modules import getnewversion
-    import pyHook as hooklib
-    import pythoncom
-    import win32api
-    import win32con
-from wx.lib.pubsub import Publisher as pub
-from src.controllers.mainframecontroller import MainFrameController
-from src.controllers.popupcontroller import PopUpController
-from src.modules import options
-from src.views import notification
-import sys
-import time
+
+
 
 class ControllerMain():
 
     def __init__(self):
-
+        publisher = pub.Publisher()
         self.mainFrame = MainFrameController()
         self.popUpFrame = PopUpController()
         if os.name =="posix": self.mainFrame.view.Show()
         self.mainFrame.view.Hide()
-        self.isTrue=False
-        self.timeMouseUp=0
-        self.timeControl=0
-        self.timeMouseDown=0
-        self.dblCtrl=0
-        options.isRunTranslate=False
-        self.ctrlPressed=False
-        self.getClip=True
         self.mainFrame.view.Bind( wx.EVT_MENU,self.event_exit, self.mainFrame.view.m_menuItemExit  )
         self.mainFrame.tbicon.Bind(wx.EVT_MENU, self.event_exit, id=wx.ID_EXIT)
-        self.hm = hooklib.HookManager()
+        self.globalEvents=HandlerGlobalEvents()
+
+        publisher.subscribe(self.get_clipboard_data, "TranslateText")
+        publisher.subscribe(self.hide_frames, "HideFrames")
+
         if os.name =="nt":
-            pub.subscribe(self.version_result, "VERSION")
+            publisher.subscribe(self.version_result, "VERSION")
             getnewversion.NewVersionThread(False)
-            self.hm.KeyDown = self.on_key_down
-            self.hm.KeyUp = self.on_key_up
-            self.hm.HookKeyboard()
-            self.hm.MouseMiddleDown = self.on_mouse_event_hide
-            self.hm.MouseRightDown = self.on_mouse_event_hide
-            self.hm.MouseLeftDown = self.on_mouse_down_event
-            self.hm.MouseLeftUp = self.on_mouse_up_event
-            self.hm.HookMouse()
-            pythoncom.PumpMessages()
-        elif os.name =="posix":
-            pub.subscribe(self.on_mouse_down_event, "MouseAllButtonsDown")
-            pub.subscribe(self.on_mouse_up_event, "MouseAllButtonsUp")
-            pub.subscribe(self.on_key_down, "KeyDown")
-            pub.subscribe(self.on_key_up, "KeyUp")
-            self.hm.start()
 
     def event_exit( self, event ):
         """
         close application and remove taskbar icon, save options
         """
-        if os.name == "posix":
-            self.hm.cancel()
+        self.globalEvents.cancel()
         self.mainFrame.settings.set_global_params()
         self.mainFrame.tbicon.RemoveIcon()
         self.mainFrame.tbicon.Destroy()
         self.mainFrame.view.Destroy()
         sys.exit()
 
-    def on_mouse_event_hide(self, event):
-        """
-        Hide PopUpFrame on mouse right down
-        """
-        self.popUpFrame.view.Hide()
-        return True
-
-    def on_key_down(self, event):
-        """
-        Hide PopUpFrame on mouse right down
-        """
-        if os.name=="posix":
-            event=event.data
-        if event.Key=="Control_L" or event.Key=="Control_R" or event.Key=='Lcontrol' or event.Key=='Rcontrol':
-            self.ctrlPressed=True
-        return True
-
-    def on_key_up(self, event):
-        """
-        Hide PopUpFrame on mouse right down
-        """
-        if os.name=="posix":
-            event=event.data
-        if event.Key=="Control_L" or event.Key=="Control_R"  or event.Key=='Lcontrol' or event.Key=='Rcontrol':
-            self.ctrlPressed=False
-            self.dblCtrl+=1
-            if self.dblCtrl==1: self.timeKeyUp = event.Time
-            if options.useDblControl and self.dblCtrl==2:
-                if 250 > event.Time-self.timeKeyUp:
-                    self.dblCtrl=0
-                    self.timeKeyUp=0
-                    self.get_clipboard_data(True)
-                else:
-                    self.dblCtrl=1
-                    self.timeKeyUp = event.Time
-        return True
-
     def hide_frames(self,event):
-        # Hide PopUpFrame
 
+        # Hide PopUpFrame
+        event=event.data
         if self.popUpFrame.view.IsShown():
             popUpFrameSize = self.popUpFrame.view.GetSizeTuple()
             popUpFramePos = self.popUpFrame.view.GetPositionTuple()
@@ -153,65 +95,20 @@ class ControllerMain():
                         options.isRunTranslate=False
 
 
-    def on_mouse_down_event(self, event):
-        """
-        Hide PopUpFrame and ResultFrame on mouse event outside frames
-        """
-        options.countClickUp+=1
-        if os.name=="posix":
-            event=event.data
-        if event.MessageName!='mouse left down':
-            return True
-
-        self.timeMouseDown = event.Time
-        return True
-
-    def on_mouse_up_event(self, event):
-        """
-        processing of double mouse click or mouse selection of words
-        """
-        if os.name=="posix":
-            event=event.data
-        if event.MessageName!='mouse left up':
-            return True
-        self.hide_frames(event)
-        if not options.enableApp:
-            return True
-        if options.isRunTranslate:
-            return True
-        if options.useControl and self.ctrlPressed:
-            self.isTrue=True
-        elif options.useNothing:
-            self.isTrue=True
-        if self.isTrue:
-            # long down mouse, when select text
-            if 300 < event.Time-self.timeMouseDown:
-                self.popUpFrame.showFrame=False
-                self.timeMouseUp=0
-                self.get_clipboard_data(False)
-
-            # double click
-            if 300 > event.Time-self.timeMouseUp:
-                self.popUpFrame.showFrame=False
-                self.timeMouseUp=0
-                self.get_clipboard_data(False)
-            else:
-                self.timeMouseUp=event.Time
-            self.isTrue=False
-        return True
-
-
     def get_clipboard_data(self,isTranslateNow):
         """
         get selection text use clipboard
         """
+        isTranslateNow=isTranslateNow.data
+        self.popUpFrame.view.Hide()
+        if not isTranslateNow:
+            self.popUpFrame.showFrame=False
         options.countClickUp=0
         if os.name=="posix":
             try:
                 time.sleep(0.1)
                 text = popen('xsel').read()
                 options.isRunTranslate=True
-#                print "get_clipboard_data"
                 self.popUpFrame.dataText = text
                 if self.popUpFrame.dataText!="":
                     if isTranslateNow:
@@ -221,11 +118,11 @@ class ControllerMain():
                         self.popUpFrame.view.Show()
                     self.dblCtrl=0
             except Exception, ex:
-                self.popUpFrame.dataText='error: '+sys.exc_info()[0].message.encode('utf-8')
+                self.popUpFrame.dataText=ex.message.encode('utf-8')
                 self.popUpFrame.view.Show()
 
         elif os.name =="nt":
-            self.hm.UnhookKeyboard()
+            self.globalEvents.hookKeyboard(False)
             run_clipboard(self)
             success = False
             data = wx.TextDataObject()
@@ -242,13 +139,12 @@ class ControllerMain():
                                 self.popUpFrame.translate()
                             else:
                                 self.popUpFrame.view.Show()
-#                            self.dblCtrl=0
             except Exception, ex:
-                self.popUpFrame.dataText='error: '+sys.exc_info()[0].message.encode('utf-8')
+                self.popUpFrame.dataText=ex.message.encode('utf-8')
                 self.popUpFrame.view.Show()
             finally:
                 restore_clipboard(self)
-                self.hm.HookKeyboard()
+                self.globalEvents.hookKeyboard()
 
     def version_result(self, msg):
         if options.version < msg.data:

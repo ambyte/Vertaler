@@ -43,7 +43,7 @@ from Xlib import X, XK, display, error
 from Xlib.ext import record
 from Xlib.protocol import rq
 import wx
-from wx.lib.pubsub import Publisher as pub
+from wx.lib.pubsub import pub
 
 #######################################################################
 ########################START CLASS DEF################################
@@ -155,26 +155,36 @@ class HookManager(threading.Thread):
                 hookevent = self.keypressevent(event)
 #                self.KeyDown(hookevent)
                 wx.CallAfter(pub.sendMessage,"KeyDown", hookevent)
+                self.event_call(hookevent)
             elif event.type == X.KeyRelease:
                 hookevent = self.keyreleaseevent(event)
 #                self.KeyUp(hookevent)
                 wx.CallAfter(pub.sendMessage,"KeyUp", hookevent)
+                self.event_call(hookevent)
             elif event.type == X.ButtonPress:
                 hookevent = self.buttonpressevent(event)
 #                self.MouseAllButtonsDown(hookevent)
                 wx.CallAfter(pub.sendMessage,"MouseAllButtonsDown", hookevent)
+                self.event_call(hookevent)
             elif event.type == X.ButtonRelease:
                 hookevent = self.buttonreleaseevent(event)
 #                self.MouseAllButtonsUp(hookevent)
                 wx.CallAfter(pub.sendMessage,"MouseAllButtonsUp", hookevent)
+                self.event_call(hookevent)
             elif event.type == X.MotionNotify:
                 # use mouse moves to record mouse position, since press and release events
                 # do not give mouse position info (event.root_x and event.root_y have
                 # bogus info).
 #                self.mousemoveevent(event)
                 wx.CallAfter(pub.sendMessage,"mousemoveevent", event)
+#                self.event_call(hookevent)
 
 #        print "processing events...", event.type
+
+    def event_call(self,event):
+        publisher = pub.Publisher()
+        wx.CallAfter(publisher.sendMessage,"EventCall", event)
+
 
     def keypressevent(self, event):
         matchto = self.lookup_keysym(self.local_dpy.keycode_to_keysym(event.detail, 0))

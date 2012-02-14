@@ -21,12 +21,11 @@
 # ----------------------------------------------------------------------------
 
 """ Controller for SettingLang frame """
-import os
 
 import wx
+from src.modules.settings import options
 from src.views.settinglangframe import SettingLangFrame
-from src.modules import  options
-from wx.lib.pubsub import Publisher as pub
+from wx.lib.pubsub import pub
 
 class SettingLangController:
 
@@ -81,9 +80,10 @@ class SettingLangController:
         """
         save selected languages in options and send message to mainframe
         """
+        publisher = pub.Publisher()
         options.langList=self.checkedListChoicesData
         options.langList.sort()
-        pub.sendMessage("SAVE LANG")
+        publisher.sendMessage("SAVE LANG")
         self.view.Close()
 
 

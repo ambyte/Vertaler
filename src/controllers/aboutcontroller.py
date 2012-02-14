@@ -21,13 +21,12 @@
 # ----------------------------------------------------------------------------
 
 """ Controller for AboutBox frame """
-import os
 
 import wx
+from src.modules.settings import options
 from src.views.aboutframe import AboutFrame, licence
-from wx.lib.pubsub import Publisher as pub
-from src.modules import options, getnewversion
-from src.modules import gettext_windows
+from wx.lib.pubsub import pub
+from src.modules import  getnewversion
 
 
 description = _('Vertaler is an open source program that allows you to translate the text in a variety\
@@ -38,9 +37,10 @@ copyright = '(C) 2011 Sergey Gulyaev'
 
 class AboutController:
     def __init__(self):
+        publisher = pub.Publisher()
         self.view = AboutFrame(None, _('About Vertaler'))
         newVersion=getnewversion.NewVersionThread(True)
-        pub.subscribe(self.version_result, "VERSION ABOUT")
+        publisher.subscribe(self.version_result, "VERSION ABOUT")
         self.page = '''<html>
         <h1 align="center">Vertaler %s</h1>
         <p align="center">"%s"</p>

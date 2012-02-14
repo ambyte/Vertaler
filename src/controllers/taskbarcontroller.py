@@ -23,7 +23,7 @@
 """ Controller for TaskBar """
 import wx
 from src.controllers import settingcontroller, aboutcontroller
-from src.modules import options
+from src.modules.settings import options
 
 from src.views.mainframe import MainTaskBarIcon
 
