@@ -24,9 +24,9 @@
 
 import os
 import wx
-from src.views.settingframe import SettingFrame
-import src.modules.settings.options as options
-from src.views.settingframeforposix import SettingFrameForPosix
+from src.gui.settingframe import SettingFrame
+import src.modules.settings.config as options
+from src.gui.settingframeforposix import SettingFrameForPosix
 
 if os.name =="nt":
     from src.modules import startupapp
@@ -39,25 +39,25 @@ class SettingController:
         elif os.name =="posix":
             self.view = SettingFrameForPosix(None)
         self.view.s_staticTextMessage.Label=""
-        if options.useControl:
+        if config.useControl:
             self.view.s_radioBox1.SetSelection(0)
-        if options.useNothing:
+        if config.useNothing:
             self.view.s_radioBox1.SetSelection(1)
-        if options.useGoogle:
+        if config.useGoogle:
             self.view.s_radioBox2.SetSelection(1)
-        if options.useBing:
+        if config.useBing:
             self.view.s_radioBox2.SetSelection(0)
 
-        self.view.s_choiceSearch.Selection= options.defaultSearchEngine
-        self.view.s_checkBoxDblCtrl.SetValue(options.useDblControl)
+        self.view.s_choiceSearch.Selection= config.defaultSearchEngine
+        self.view.s_checkBoxDblCtrl.SetValue(config.useDblControl)
         if os.name =="nt":
-            self.view.s_checkBoxStartWithWin.SetValue(options.startWithOS)
-            self.view.s_checkBoxUseProxy.SetValue(options.useProxy)
-            self.view.s_textCtrlAddress.Value= options.proxyAddress
-            self.view.s_textCtrlPort.Value= options.proxyPort
-            self.view.s_textCtrlLogin.Value= options.proxyLogin
-            self.view.s_textCtrlPass.Value= options.proxyPassword
-            self.view.s_checkBoxUpdate.SetValue(options.enableNotification)
+            self.view.s_checkBoxStartWithWin.SetValue(config.startWithOS)
+            self.view.s_checkBoxUseProxy.SetValue(config.useProxy)
+            self.view.s_textCtrlAddress.Value= config.proxyAddress
+            self.view.s_textCtrlPort.Value= config.proxyPort
+            self.view.s_textCtrlLogin.Value= config.proxyLogin
+            self.view.s_textCtrlPass.Value= config.proxyPassword
+            self.view.s_checkBoxUpdate.SetValue(config.enableNotification)
 
         # Connect Events
 
@@ -84,29 +84,29 @@ class SettingController:
 
         radioIndex2 =self.view.s_radioBox2.GetSelection()
         if not radioIndex2:
-            options.useGoogle=False
-            options.useBing=True
+            config.useGoogle=False
+            config.useBing=True
         elif radioIndex2:
-            options.useGoogle=True
-            options.useBing=False
+            config.useGoogle=True
+            config.useBing=False
         radioIndex1 =self.view.s_radioBox1.GetSelection()
         if not radioIndex1:
-            options.useControl=True
-            options.useNothing=False
+            config.useControl=True
+            config.useNothing=False
         elif radioIndex1:
-            options.useControl=False
-            options.useNothing=True
-        options.defaultSearchEngine=self.view.s_choiceSearch.Selection
-        options.useDblControl=self.view.s_checkBoxDblCtrl.GetValue()
+            config.useControl=False
+            config.useNothing=True
+        config.defaultSearchEngine=self.view.s_choiceSearch.Selection
+        config.useDblControl=self.view.s_checkBoxDblCtrl.GetValue()
 
         if os.name =="nt":
-            options.enableNotification=self.view.s_checkBoxUpdate.GetValue()
-            options.useProxy=self.view.s_checkBoxUseProxy.GetValue()
-            options.proxyAddress=self.view.s_textCtrlAddress.Value
-            options.proxyPort=self.view.s_textCtrlPort.Value
-            options.proxyLogin=self.view.s_textCtrlLogin.Value
-            options.proxyPassword=self.view.s_textCtrlPass.Value
-            options.startWithOS=self.view.s_checkBoxStartWithWin.GetValue()
+            config.enableNotification=self.view.s_checkBoxUpdate.GetValue()
+            config.useProxy=self.view.s_checkBoxUseProxy.GetValue()
+            config.proxyAddress=self.view.s_textCtrlAddress.Value
+            config.proxyPort=self.view.s_textCtrlPort.Value
+            config.proxyLogin=self.view.s_textCtrlLogin.Value
+            config.proxyPassword=self.view.s_textCtrlPass.Value
+            config.startWithOS=self.view.s_checkBoxStartWithWin.GetValue()
             self.start_with_os()
 
         publisher.sendMessage("SAVE SETTINGS")
@@ -114,7 +114,7 @@ class SettingController:
 
     def start_with_os(self):
         if os.name =="nt":
-            if options.startWithOS:
+            if config.startWithOS:
                 startupapp.set_startup()
             else:
                 startupapp.delete_startup()

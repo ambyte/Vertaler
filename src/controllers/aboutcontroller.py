@@ -23,8 +23,8 @@
 """ Controller for AboutBox frame """
 
 import wx
-from src.modules.settings import options
-from src.views.aboutframe import AboutFrame, licence
+from src.modules.settings import config
+from src.gui.aboutframe import AboutFrame, licence
 from wx.lib.pubsub import pub
 from src.modules import  getnewversion
 
@@ -49,7 +49,7 @@ class AboutController:
         <p align="center">"%s"</p>
         <p align="center"><a href="http://openiconlibrary.sourceforge.net/">Open Icon Library</a></p>
         <p align="center"><a href="http://gentleface.com/free_icon_set.html">Wireframe Toolbar Icons</a></p>
-        </html>''' % (options.version,description.encode("UTF-8"),copyright,icons.encode("UTF-8"))
+        </html>''' % (config.version,description.encode("UTF-8"),copyright,icons.encode("UTF-8"))
         self.view.b_htmlWin.SetPage(self.page.decode("UTF-8"))
 
         # Connect Events
@@ -71,9 +71,9 @@ class AboutController:
             self.view.b_buttonLicense.Label=_('License')
 
     def version_result(self, msg):
-        if options.version < msg.data:
+        if config.version < msg.data:
             try:
-                if options.version < msg.data:
+                if config.version < msg.data:
                     self.page = '''<html>
                     <h1 align="center">Vertaler %s</h1>
                     <p align="center">%s</p>
@@ -83,7 +83,7 @@ class AboutController:
                     <p align="center">%s</p>
                     <p align="center"><a href="http://openiconlibrary.sourceforge.net/">Open Icon Library</a></p>
                     <p align="center"><a href="http://gentleface.com/free_icon_set.html">Wireframe Toolbar Icons</a></p>
-                    </html>''' % (options.version,description.encode("UTF-8"),copyright,
+                    </html>''' % (config.version,description.encode("UTF-8"),copyright,
                                       newVersion.encode("UTF-8"),msg.data,icons.encode("UTF-8"))
             except Exception, ex:
                 pass

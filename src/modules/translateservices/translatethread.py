@@ -28,8 +28,8 @@ import time
 
 from threading import Thread
 from wx.lib.pubsub import pub
-from src.modules.settings.options import langForTran
-from src.modules.settings import options
+from src.modules.settings.config import langForTran
+from src.modules.settings import config
 from src.modules.translateservices.translatebing import Translator
 from src.modules.translateservices.translategoogle import translate_google
 
@@ -58,8 +58,8 @@ class TranslateThread(Thread):
             sourceL=tran.detect(self.sourceText.encode("utf-8"))
 #            sourceL=tran.detect(self.sourceText)
             # if language of source text is target language then target language equally source language
-            if self.targetLang==sourceL and len(options.langList)==2:
-                for lang in options.langList:
+            if self.targetLang==sourceL and len(config.langList)==2:
+                for lang in config.langList:
                     langAbr=''
                     for k, v in langForTran.iteritems():
                         if v==lang:
@@ -69,9 +69,9 @@ class TranslateThread(Thread):
                         break
             time.sleep(0.1)
             result.append(sourceL)
-            if options.useBing:
+            if config.useBing:
                 result.append(tran.translate(self.sourceText.encode("utf-8"),self.targetLang,from_lang=self.sourceLang))
-            if options.useGoogle:
+            if config.useGoogle:
                 if os.name=="nt":
                     result.append(translate_google(self.sourceText,self.sourceLang,self.targetLang))
                 else:

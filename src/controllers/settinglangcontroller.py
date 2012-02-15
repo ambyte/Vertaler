@@ -23,14 +23,14 @@
 """ Controller for SettingLang frame """
 
 import wx
-from src.modules.settings import options
-from src.views.settinglangframe import SettingLangFrame
+from src.modules.settings import config
+from src.gui.settinglangframe import SettingLangFrame
 from wx.lib.pubsub import pub
 
 class SettingLangController:
 
     def __init__(self):
-        self.checkedListChoicesData = options.langList
+        self.checkedListChoicesData = config.langList
         self.view = SettingLangFrame(None)
 
         # Connect Events
@@ -81,8 +81,8 @@ class SettingLangController:
         save selected languages in options and send message to mainframe
         """
         publisher = pub.Publisher()
-        options.langList=self.checkedListChoicesData
-        options.langList.sort()
+        config.langList=self.checkedListChoicesData
+        config.langList.sort()
         publisher.sendMessage("SAVE LANG")
         self.view.Close()
 
@@ -98,7 +98,7 @@ class SettingLangController:
         set selected languages
         """
         listChoices = []
-        for k, v in options.langForTran.iteritems():
+        for k, v in config.langForTran.iteritems():
             listChoices.append(v)
         listChoices.sort()
         self.set_list_into_control(listChoices)
@@ -108,7 +108,7 @@ class SettingLangController:
         search language
         """
         listChoices = []
-        for k, v in options.langForTran.iteritems():
+        for k, v in config.langForTran.iteritems():
             if self.view.l_searchCtrl.Value.lower() in v.lower():
                 listChoices.append(v)
         listChoices.sort()

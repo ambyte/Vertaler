@@ -27,6 +27,21 @@ from src.modules import httprequest
 
 def translate_google(text, sourcelang="auto", targetlang="ru"):
     url = "http://www.google.com/translate_a/t?client=t"
+	#Mozilla/5.0 (Windows NT 5.1) AppleWebKit/535.11 (KHTML, like Gecko) Chrome/17.0.963.46 Safari/535.11
+	#Request URL:http://translate.google.ru/translate_a/t?client=t&text=%D0%BF%D1%80%D0%B8%D0%B2%D0%B5%D1%82&hl=ru&sl=auto&tl=en&multires=1&srcrom=1&prev=btn&ssel=0&tsel=0&uptl=en&alttl=ja&sc=1
+	#client:t
+	#text:привет
+	#hl:ru
+	#sl:auto
+	#tl:en
+	#multires:1
+	#srcrom:1
+	#prev:btn
+	#ssel:0
+	#tsel:0
+	#uptl:en
+	#alttl:ja
+	#sc:1
     headers={ 'User-Agent': 'Mozilla/5.0', 'Accept-Charset': 'utf-8' }
     data = {'q' : text.encode("UTF-8"),
             'sl': sourcelang,

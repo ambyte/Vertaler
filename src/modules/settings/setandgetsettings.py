@@ -24,7 +24,7 @@
 
 import wx
 import cPickle
-from src.modules.settings import options
+from src.modules.settings import config
 
 class Settings():
     def __init__(self):
@@ -36,74 +36,74 @@ class Settings():
             data = self.cfg.Read("langList")
             data=str(unicode(data))
             if cPickle.loads(data):
-                options.langList = cPickle.loads(data)
+                config.langList = cPickle.loads(data)
 
         if self.cfg.Exists('defaultLangFrom'):
             data = self.cfg.Read("defaultLangFrom")
-            options.defaultLangFrom=str(unicode(data))
+            config.defaultLangFrom=str(unicode(data))
         if self.cfg.Exists('defaultLangTo'):
             data = self.cfg.Read("defaultLangTo")
-            options.defaultLangTo=str(unicode(data))
+            config.defaultLangTo=str(unicode(data))
 
         if self.cfg.Exists('enableNotification'):
-            options.enableNotification  = self.cfg.ReadBool("enableNotification")
+            config.enableNotification  = self.cfg.ReadBool("enableNotification")
         if self.cfg.Exists('visitedVersion'):
-            options.visitedVersion = self.cfg.ReadFloat("visitedVersion")
+            config.visitedVersion = self.cfg.ReadFloat("visitedVersion")
         if self.cfg.Exists('defaultSearchEngine'):
-            options.defaultSearchEngine = self.cfg.ReadInt("defaultSearchEngine")
+            config.defaultSearchEngine = self.cfg.ReadInt("defaultSearchEngine")
         if self.cfg.Exists('useControl'):
-            options.useControl = self.cfg.ReadBool("useControl")
+            config.useControl = self.cfg.ReadBool("useControl")
         if self.cfg.Exists('useDblControl'):
-            options.useDblControl = self.cfg.ReadBool("useDblControl")
+            config.useDblControl = self.cfg.ReadBool("useDblControl")
         if self.cfg.Exists('useNothing'):
-            options.useNothing = self.cfg.ReadBool("useNothing")
+            config.useNothing = self.cfg.ReadBool("useNothing")
         if self.cfg.Exists('useGoogle'):
-            options.useGoogle = self.cfg.ReadBool("useGoogle")
+            config.useGoogle = self.cfg.ReadBool("useGoogle")
         if self.cfg.Exists('useBing'):
-            options.useBing = self.cfg.ReadBool("useBing")
+            config.useBing = self.cfg.ReadBool("useBing")
         if self.cfg.Exists('startWithOS'):
-            options.startWithOS = self.cfg.ReadBool("startWithOS")
+            config.startWithOS = self.cfg.ReadBool("startWithOS")
         if self.cfg.Exists('useProxy'):
-            options.useProxy = self.cfg.ReadBool("useProxy")
+            config.useProxy = self.cfg.ReadBool("useProxy")
         if self.cfg.Exists('proxyAddress'):
             data = self.cfg.Read("proxyAddress")
-            options.proxyAddress=str(unicode(data))
+            config.proxyAddress=str(unicode(data))
         if self.cfg.Exists('proxyPort'):
             data = self.cfg.Read("proxyPort")
-            options.proxyPort=str(unicode(data))
+            config.proxyPort=str(unicode(data))
         if self.cfg.Exists('proxyLogin'):
             data = self.cfg.Read("proxyLogin")
-            options.proxyLogin=str(unicode(data))
+            config.proxyLogin=str(unicode(data))
         if self.cfg.Exists('proxyPassword'):
             data = self.cfg.Read("proxyPassword")
-            options.proxyPassword=str(unicode(data))
+            config.proxyPassword=str(unicode(data))
         return True
 
     def set_global_params(self):
-        langList =  cPickle.dumps(options.langList)
-        if options.enableApp:
-            self.cfg.WriteBool("useControl", options.useControl)
-            self.cfg.WriteBool("useNothing", options.useNothing)
-        self.cfg.WriteFloat("visitedVersion", options.visitedVersion)
-        self.cfg.WriteInt("defaultSearchEngine", options.defaultSearchEngine)
-        self.cfg.WriteBool("useDblControl", options.useDblControl)
-        self.cfg.WriteBool("enableNotification", options.enableNotification)
+        langList =  cPickle.dumps(config.langList)
+        if config.enableApp:
+            self.cfg.WriteBool("useControl", config.useControl)
+            self.cfg.WriteBool("useNothing", config.useNothing)
+        self.cfg.WriteFloat("visitedVersion", config.visitedVersion)
+        self.cfg.WriteInt("defaultSearchEngine", config.defaultSearchEngine)
+        self.cfg.WriteBool("useDblControl", config.useDblControl)
+        self.cfg.WriteBool("enableNotification", config.enableNotification)
         self.cfg.Write("langList", langList)
-        self.cfg.WriteBool("useGoogle", options.useGoogle)
-        self.cfg.WriteBool("useBing", options.useBing)
-        self.cfg.WriteBool("useProxy", options.useProxy)
-        self.cfg.WriteBool("startWithOS", options.startWithOS)
-        self.cfg.Write("proxyAddress", options.proxyAddress)
-        self.cfg.Write("proxyPort", options.proxyPort)
-        self.cfg.Write("proxyLogin", options.proxyLogin)
-        self.cfg.Write("proxyPassword", options.proxyPassword)
-        self.cfg.Write("defaultLangFrom", options.defaultLangFrom)
-        self.cfg.Write("defaultLangTo", options.defaultLangTo)
+        self.cfg.WriteBool("useGoogle", config.useGoogle)
+        self.cfg.WriteBool("useBing", config.useBing)
+        self.cfg.WriteBool("useProxy", config.useProxy)
+        self.cfg.WriteBool("startWithOS", config.startWithOS)
+        self.cfg.Write("proxyAddress", config.proxyAddress)
+        self.cfg.Write("proxyPort", config.proxyPort)
+        self.cfg.Write("proxyLogin", config.proxyLogin)
+        self.cfg.Write("proxyPassword", config.proxyPassword)
+        self.cfg.Write("defaultLangFrom", config.defaultLangFrom)
+        self.cfg.Write("defaultLangTo", config.defaultLangTo)
         self.cfg.Flush()
 
     def save_lang_param(self):
-        self.cfg.Write("defaultLangFrom", options.defaultLangFrom)
-        self.cfg.Write("defaultLangTo", options.defaultLangTo)
-        langList =  cPickle.dumps(options.langList)
+        self.cfg.Write("defaultLangFrom", config.defaultLangFrom)
+        self.cfg.Write("defaultLangTo", config.defaultLangTo)
+        langList =  cPickle.dumps(config.langList)
         self.cfg.Write("langList", langList)
 

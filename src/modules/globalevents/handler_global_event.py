@@ -24,7 +24,7 @@
 
 import os
 import wx
-from src.modules.settings import options
+from src.modules.settings import config
 
 if os.name =="posix":
     from posix import popen
@@ -96,7 +96,7 @@ class HandlerGlobalEvents():
             self.ctrlPressed=False
             self.dblCtrl+=1
             if self.dblCtrl==1: self.timeKeyUp = event.Time
-            if options.useDblControl and self.dblCtrl==2:
+            if config.useDblControl and self.dblCtrl==2:
                 if 300 > event.Time-self.timeKeyUp:
                     self.dblCtrl=0
                     self.timeKeyUp=0
@@ -110,7 +110,7 @@ class HandlerGlobalEvents():
         """
         Hide PopUpFrame and ResultFrame on mouse event outside frames
         """
-        options.countClickUp+=1
+        config.countClickUp+=1
         if event.MessageName!='mouse left down':
             return True
 
@@ -124,13 +124,13 @@ class HandlerGlobalEvents():
         if event.MessageName!='mouse left up':
             return True
         wx.CallAfter(self.publisher.sendMessage,"HideFrames", event)
-        if not options.enableApp:
+        if not config.enableApp:
             return True
-        if options.isRunTranslate:
+        if config.isRunTranslate:
             return True
-        if options.useControl and self.ctrlPressed:
+        if config.useControl and self.ctrlPressed:
             self.isTrue=True
-        elif options.useNothing:
+        elif config.useNothing:
             self.isTrue=True
         if self.isTrue:
             # long down mouse, when select text

@@ -26,12 +26,12 @@ import os
 import wx
 import sys
 import time
-from src.modules.settings import options
+from src.modules.settings import config
 from wx.lib.pubsub import pub
 from src.controllers.mainframecontroller import MainFrameController
 from src.controllers.popupcontroller import PopUpController
 from src.modules.globalevents.handler_global_event import HandlerGlobalEvents
-from src.views import notification
+from src.gui import notification
 
 if os.name =="posix":
     from posix import popen
@@ -81,9 +81,9 @@ class ControllerMain():
             if event.Position[0] > popUpFramePos[0]+popUpFrameSize[0] or popUpFramePos[0]>event.Position[0] or \
                 popUpFramePos[1]>event.Position[1] or event.Position[1]> popUpFramePos[1]+popUpFrameSize[1]:
                 self.popUpFrame.view.Hide()
-                options.isRunTranslate=False
+                config.isRunTranslate=False
 
-        if options.countClickUp!=2:
+        if config.countClickUp!=2:
             # Hide ResultFrame
             if self.popUpFrame.resultController.view.IsShown():
                 if not self.popUpFrame.resultController.view.selectLang:
@@ -92,7 +92,7 @@ class ControllerMain():
                     if event.Position[0] > textFramePos[0]+textFrameSize[0] or textFramePos[0]>event.Position[0] or \
                         textFramePos[1]>event.Position[1] or event.Position[1]> textFramePos[1]+textFrameSize[1]:
                         self.popUpFrame.resultController.view.Hide()
-                        options.isRunTranslate=False
+                        config.isRunTranslate=False
 
 
     def get_clipboard_data(self,isTranslateNow):
@@ -103,16 +103,16 @@ class ControllerMain():
         self.popUpFrame.view.Hide()
         if not isTranslateNow:
             self.popUpFrame.showFrame=False
-        options.countClickUp=0
+        config.countClickUp=0
         if os.name=="posix":
             try:
                 time.sleep(0.1)
                 text = popen('xsel').read()
-                options.isRunTranslate=True
+                config.isRunTranslate=True
                 self.popUpFrame.dataText = text
                 if self.popUpFrame.dataText!="":
                     if isTranslateNow:
-                        options.countClickUp=1
+                        config.countClickUp=1
                         self.popUpFrame.translate()
                     else:
                         self.popUpFrame.view.Show()
@@ -133,9 +133,9 @@ class ControllerMain():
                     if success:
                         self.popUpFrame.dataText = data.GetText().strip()
                         if self.popUpFrame.dataText!="":
-                            options.isRunTranslate=True
+                            config.isRunTranslate=True
                             if isTranslateNow:
-                                options.countClickUp=1
+                                config.countClickUp=1
                                 self.popUpFrame.translate()
                             else:
                                 self.popUpFrame.view.Show()
@@ -147,9 +147,9 @@ class ControllerMain():
                 self.globalEvents.hookKeyboard()
 
     def version_result(self, msg):
-        if options.version < msg.data:
-            if options.enableNotification or msg.data > options.visitedVersion:
-                options.enableNotification=True
-                options.visitedVersion=msg.data
+        if config.version < msg.data:
+            if config.enableNotification or msg.data > config.visitedVersion:
+                config.enableNotification=True
+                config.visitedVersion=msg.data
                 self.pop=notification.NotificationFrame(self.mainFrame.view,msg.data)
                 self.pop.Show()

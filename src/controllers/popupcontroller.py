@@ -25,7 +25,7 @@
 import webbrowser
 import wx
 import os
-from src.modules.settings import options
+from src.modules.settings import config
 
 if os.name =="nt":
     import win32gui
@@ -33,7 +33,7 @@ if os.name =="nt":
 elif os.name =="posix":
     from Xlib import display
 from wx.lib.pubsub import pub
-from src.views.popupframe import PopUpFrame
+from src.gui.popupframe import PopUpFrame
 from src.controllers.resultcontroller import ResultController
 
 
@@ -98,14 +98,14 @@ class PopUpController:
         else:
             if os.name =="nt":
                 clipboardlib.event_press_ctrl()
-            options.isRunTranslate=False
+            config.isRunTranslate=False
 
     def on_timer(self, event):
         """
         Hide frame when timer off
         """
         self.timer.Stop()
-        options.isRunTranslate=False
+        config.isRunTranslate=False
         self.view.Hide()
 
     def event_enter( self, event ):
@@ -130,7 +130,7 @@ class PopUpController:
 
     def translate(self):
 #        print "translate"
-        options.countClickUp+=1
+        config.countClickUp+=1
         self.resultController.countRunTranslator+=1
         self.resultController.view.SetSize((50,17))
         self.resultController.set_position()
@@ -152,26 +152,26 @@ class PopUpController:
             wx.TheClipboard.Close()
         else:
             wx.MessageBox(_("Unable to open the clipboard"), _("Error"))
-        options.isRunTranslate=False
+        config.isRunTranslate=False
         self.view.Hide()
 
     def event_search( self, event ):
         """
         Search selected text on browser
         """
-        if options.defaultSearchEngine==0:
+        if config.defaultSearchEngine==0:
             webbrowser.open_new_tab('http://www.google.com/search?q='+self.dataText+
                                     '&sourceid=vertalerproject.org&ie=utf-8&oe=utf-8')
-        elif options.defaultSearchEngine==1:
+        elif config.defaultSearchEngine==1:
             webbrowser.open_new_tab('http://www.bing.com/search?q='+self.dataText+
                                     '&form=OPRTSD&pc=vertalerproject.org')
-        elif options.defaultSearchEngine==2:
+        elif config.defaultSearchEngine==2:
             webbrowser.open_new_tab('http://search.yahoo.com/search?p='+self.dataText+
                                     '&ei=UTF-8&fr=vertalerproject.org')
-        elif options.defaultSearchEngine==3:
+        elif config.defaultSearchEngine==3:
             webbrowser.open_new_tab('http://yandex.ru/yandsearch?text='+self.dataText+
                                     '&from=vertalerproject.org')
-        options.isRunTranslate=False
+        config.isRunTranslate=False
         self.view.Hide()
         
     def event_open_main( self, event ):
@@ -180,12 +180,12 @@ class PopUpController:
         """
         publisher = pub.Publisher()
         publisher.sendMessage("GO HOME",self.dataText)
-        options.isRunTranslate=False
+        config.isRunTranslate=False
         self.view.Hide()
 
     def event_close( self, event ):
         """
         Close frame
         """
-        options.isRunTranslate=False
+        config.isRunTranslate=False
         self.view.Hide()

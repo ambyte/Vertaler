@@ -23,17 +23,17 @@
 """ Controller for TaskBar """
 import wx
 from src.controllers import settingcontroller, aboutcontroller
-from src.modules.settings import options
+from src.modules.settings import config
 
-from src.views.mainframe import MainTaskBarIcon
+from src.gui.mainframe import MainTaskBarIcon
 
 class MainTaskBarIconController:
 
     def __init__(self):
          self.tbicon = MainTaskBarIcon(self)
 
-         self.tbicon.menuItemCtrl.Check(options.useControl)
-         self.tbicon.menuItemNothing.Check(options.useNothing)
+         self.tbicon.menuItemCtrl.Check(config.useControl)
+         self.tbicon.menuItemNothing.Check(config.useNothing)
 
          # Connect Events
 
@@ -46,13 +46,13 @@ class MainTaskBarIconController:
         """
         translate text when press control
         """
-        options.useControl=self.tbicon.menuItemCtrl.IsChecked()
+        config.useControl=self.tbicon.menuItemCtrl.IsChecked()
 
     def event_setting_nothing( self, event ):
         """
         translate text when nothing press
         """
-        options.useNothing=self.tbicon.menuItemNothing.IsChecked()
+        config.useNothing=self.tbicon.menuItemNothing.IsChecked()
 
     def event_about( self, event ):
         """

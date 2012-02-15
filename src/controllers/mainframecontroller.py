@@ -23,16 +23,16 @@
 """ Controller for MainFrame """
 import os
 import wx
-from src.modules.settings import setandgetsettings, options
+from src.modules.settings import setandgetsettings, config
 from src.modules.translateservices import translatethread
 
 if os.name =="nt":
     from src.modules import startupapp
 from wx.lib.pubsub import pub
-from src.views.mainframe import MainFrame, MainTaskBarIcon
+from src.gui.mainframe import MainFrame, MainTaskBarIcon
 from src.controllers import settinglangcontroller , aboutcontroller, settingcontroller
 from src.modules import options
-from src.modules.settings.options import langForTran
+from src.modules.settings.config import langForTran
 
 
 class MainFrameController():
@@ -43,10 +43,10 @@ class MainFrameController():
          self.settings = setandgetsettings.Settings()
          if os.name =="nt":
              if startupapp.is_start_up():
-                options.startWithOS=True
-                self.view.m_menuItemStartUpLoad.Check(options.startWithOS)
+                config.startWithOS=True
+                self.view.m_menuItemStartUpLoad.Check(config.startWithOS)
              else:
-                options.startWithOS=False
+                config.startWithOS=False
          self.isShow=False
          self.langSetting = settinglangcontroller.SettingLangController()
          self.tbicon = MainTaskBarIcon(self)
@@ -61,17 +61,17 @@ class MainFrameController():
 
          self.view.Bind(wx.EVT_CLOSE,self.event_hide)
 
-         self.view.m_menuItemCtrl.Check(options.useControl)
-         self.view.m_menuItemNothing.Check(options.useNothing)
-         self.view.m_menuItemBing.Check(options.useBing)
-         self.view.m_menuItemGoogle.Check(options.useGoogle)
+         self.view.m_menuItemCtrl.Check(config.useControl)
+         self.view.m_menuItemNothing.Check(config.useNothing)
+         self.view.m_menuItemBing.Check(config.useBing)
+         self.view.m_menuItemGoogle.Check(config.useGoogle)
 
-         self.tbicon.menuItemCtrl.Check(options.useControl)
-         self.tbicon.menuItemNothing.Check(options.useNothing)
-         self.tbicon.menuItemDblCtrl.Check(options.useDblControl)
+         self.tbicon.menuItemCtrl.Check(config.useControl)
+         self.tbicon.menuItemNothing.Check(config.useNothing)
+         self.tbicon.menuItemDblCtrl.Check(config.useDblControl)
 
-         self.tbicon.menuUseBing.Check(options.useBing)
-         self.tbicon.menuUseGoogle.Check(options.useGoogle)
+         self.tbicon.menuUseBing.Check(config.useBing)
+         self.tbicon.menuUseGoogle.Check(config.useGoogle)
 
          # Connect TaskBar Events
          wx.EVT_TASKBAR_LEFT_DCLICK(self.tbicon, self.event_restore_window)
@@ -188,11 +188,11 @@ class MainFrameController():
             return 0
         item = self.view.m_choiceFrom.GetSelection()
         if not item:
-            options.defaultLangFrom='Auto'
+            config.defaultLangFrom='Auto'
         else:
-            options.defaultLangFrom= options.langList[item-1]
+            config.defaultLangFrom= config.langList[item-1]
         item = self.view.m_choiceTo.GetSelection()
-        options.defaultLangTo= options.langList[item]
+        config.defaultLangTo= config.langList[item]
         self.settings.save_lang_param()
         self.view.m_bpButtonLanguageSave.Enable(False)
 
@@ -241,16 +241,16 @@ class MainFrameController():
         """
         self.isMenu=True
         if not self.isSaveSetting and not self.isTbicon:
-            options.useControl=self.view.m_menuItemCtrl.IsChecked()
-            options.useNothing=self.view.m_menuItemNothing.IsChecked()
-            options.enableApp=not self.view.m_menuItemDisableApp.IsChecked()
-            self.tbicon.menuItemCtrl.Check(options.useControl)
-            self.tbicon.menuItemNothing.Check(options.useNothing)
-            self.tbicon.menuDisableApp.Check(not options.enableApp)
+            config.useControl=self.view.m_menuItemCtrl.IsChecked()
+            config.useNothing=self.view.m_menuItemNothing.IsChecked()
+            config.enableApp=not self.view.m_menuItemDisableApp.IsChecked()
+            self.tbicon.menuItemCtrl.Check(config.useControl)
+            self.tbicon.menuItemNothing.Check(config.useNothing)
+            self.tbicon.menuDisableApp.Check(not config.enableApp)
         self.isMenu=False
 
     def event_check_dbl_ctrl(self, event):
-        options.useDblControl=self.tbicon.menuItemDblCtrl.IsChecked()
+        config.useDblControl=self.tbicon.menuItemDblCtrl.IsChecked()
 
     def event_check_press_tbicon(self, event):
         """
@@ -258,12 +258,12 @@ class MainFrameController():
         """
         self.isTbicon=True
         if not self.isSaveSetting and not self.isMenu:
-            options.useControl=self.tbicon.menuItemCtrl.IsChecked()
-            options.useNothing=self.tbicon.menuItemNothing.IsChecked()
-            options.enableApp=not self.tbicon.menuDisableApp.IsChecked()
-            self.view.m_menuItemCtrl.Check(options.useControl)
-            self.view.m_menuItemNothing.Check(options.useNothing)
-            self.view.m_menuItemDisableApp.Check(not options.enableApp)
+            config.useControl=self.tbicon.menuItemCtrl.IsChecked()
+            config.useNothing=self.tbicon.menuItemNothing.IsChecked()
+            config.enableApp=not self.tbicon.menuDisableApp.IsChecked()
+            self.view.m_menuItemCtrl.Check(config.useControl)
+            self.view.m_menuItemNothing.Check(config.useNothing)
+            self.view.m_menuItemDisableApp.Check(not config.enableApp)
         self.isTbicon=False
         self.settings.set_global_params()
 
@@ -273,15 +273,15 @@ class MainFrameController():
         """
 #        TODO проверить работу в Linux
         if self.tbicon.menuUseBing.IsChecked():
-            options.useGoogle=False
-            options.useBing=True
-            self.view.m_menuItemBing.Check(options.useBing)
-            self.view.m_menuItemGoogle.Check(options.useGoogle)
+            config.useGoogle=False
+            config.useBing=True
+            self.view.m_menuItemBing.Check(config.useBing)
+            self.view.m_menuItemGoogle.Check(config.useGoogle)
         else:
-            options.useGoogle=True
-            options.useBing=False
-            self.view.m_menuItemBing.Check(options.useBing)
-            self.view.m_menuItemGoogle.Check(options.useGoogle)
+            config.useGoogle=True
+            config.useBing=False
+            self.view.m_menuItemBing.Check(config.useBing)
+            self.view.m_menuItemGoogle.Check(config.useGoogle)
 
 
     def event_check_press_services(self,event):
@@ -289,15 +289,15 @@ class MainFrameController():
         change translate service
         """
         if self.view.m_menuItemBing.IsChecked():
-            options.useGoogle=False
-            options.useBing=True
-            self.tbicon.menuUseBing.Check(options.useBing)
-            self.tbicon.menuUseGoogle.Check(options.useGoogle)
+            config.useGoogle=False
+            config.useBing=True
+            self.tbicon.menuUseBing.Check(config.useBing)
+            self.tbicon.menuUseGoogle.Check(config.useGoogle)
         else:
-            options.useGoogle=True
-            options.useBing=False
-            self.tbicon.menuUseBing.Check(options.useBing)
-            self.tbicon.menuUseGoogle.Check(options.useGoogle)
+            config.useGoogle=True
+            config.useBing=False
+            self.tbicon.menuUseBing.Check(config.useBing)
+            self.tbicon.menuUseGoogle.Check(config.useGoogle)
 
     def check_press(self,msg):
         """
@@ -305,24 +305,24 @@ class MainFrameController():
         """
         self.isSaveSetting=True
         if os.name =="nt":
-            self.view.m_menuItemStartUpLoad.Check(options.startWithOS)
-        self.view.m_menuItemBing.Check(options.useBing)
-        self.view.m_menuItemCtrl.Check(options.useControl)
-        self.view.m_menuItemNothing.Check(options.useNothing)
-        self.view.m_menuItemGoogle.Check(options.useGoogle)
-        self.tbicon.menuItemCtrl.Check(options.useControl)
-        self.tbicon.menuItemNothing.Check(options.useNothing)
-        self.tbicon.menuItemDblCtrl.Check(options.useDblControl)
-        self.tbicon.menuUseBing.Check(options.useBing)
-        self.tbicon.menuUseGoogle.Check(options.useGoogle)
+            self.view.m_menuItemStartUpLoad.Check(config.startWithOS)
+        self.view.m_menuItemBing.Check(config.useBing)
+        self.view.m_menuItemCtrl.Check(config.useControl)
+        self.view.m_menuItemNothing.Check(config.useNothing)
+        self.view.m_menuItemGoogle.Check(config.useGoogle)
+        self.tbicon.menuItemCtrl.Check(config.useControl)
+        self.tbicon.menuItemNothing.Check(config.useNothing)
+        self.tbicon.menuItemDblCtrl.Check(config.useDblControl)
+        self.tbicon.menuUseBing.Check(config.useBing)
+        self.tbicon.menuUseGoogle.Check(config.useGoogle)
         self.isSaveSetting=False
 
     def event_setting_start_up( self, event ):
         """
         Start application with OS
         """
-        options.startWithOS=self.view.m_menuItemStartUpLoad.IsChecked()
-        if options.startWithOS:
+        config.startWithOS=self.view.m_menuItemStartUpLoad.IsChecked()
+        if config.startWithOS:
             startupapp.set_startup()
         else:
             startupapp.delete_startup()
@@ -399,22 +399,22 @@ class MainFrameController():
         languages.sort()
         languagesCopy=list(languages)
         for s in languagesCopy:
-            if s in options.langList:
+            if s in config.langList:
                 languages.remove(s)
                 languages.insert(countItem,s)
                 countItem+=1
-            if countItem == len(options.langList):
+            if countItem == len(config.langList):
                 languages.insert(countItem,"--------")
                 break
 
         self.languagesTo=languages
         self.languagesFrom=['Auto']+languages
         self.view.m_choiceFrom.SetItems(self.languagesFrom)
-        if options.defaultLangFrom:
-            self.view.m_choiceFrom.Selection=self.languagesFrom.index(options.defaultLangFrom)
+        if config.defaultLangFrom:
+            self.view.m_choiceFrom.Selection=self.languagesFrom.index(config.defaultLangFrom)
         self.view.m_choiceTo.SetItems(self.languagesTo)
-        if options.defaultLangTo:
-            self.view.m_choiceTo.Selection = self.languagesTo.index(options.defaultLangTo)
+        if config.defaultLangTo:
+            self.view.m_choiceTo.Selection = self.languagesTo.index(config.defaultLangTo)
 
     def translate_result(self, msg):
         """

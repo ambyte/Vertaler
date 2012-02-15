@@ -23,10 +23,10 @@
 """ Controller for ResultFrame """
 import os
 import wx
-from src.modules.settings import options
+from src.modules.settings import config
 from src.modules.translateservices import translatethread
-from src.views.resultframe import ResultFrame
-from src.modules.settings.options import langForTran
+from src.gui.resultframe import ResultFrame
+from src.modules.settings.config import langForTran
 
 if os.name =="nt":
     import win32gui
@@ -74,11 +74,11 @@ class ResultController:
             self.view.SetFocus()
             self.showResult=True
 #            print "show resultframe"
-            self.start_translate(options.defaultLangFrom, options.defaultLangTo)
+            self.start_translate(config.defaultLangFrom, config.defaultLangTo)
         else:
             if os.name =="nt":
                 clipboardlib.event_press_ctrl()
-            options.isRunTranslate=False
+            config.isRunTranslate=False
 
     def start_translate(self,langFrom,langTo):
         """
@@ -110,20 +110,20 @@ class ResultController:
         languages.sort()
         languagesCopy=list(languages)
         for s in languagesCopy:
-            if s in options.langList:
+            if s in config.langList:
                 languages.remove(s)
                 languages.insert(countItem,s)
                 countItem+=1
-            if countItem == len(options.langList):
+            if countItem == len(config.langList):
                 languages.insert(countItem,"--------")
                 break
 
         self.languagesTo=languages
         self.languagesFrom=['Auto']+languages
         self.view.t_choiceLangFrom.SetItems(self.languagesFrom)
-        self.view.t_choiceLangFrom.Selection=self.languagesFrom.index(options.defaultLangFrom)
+        self.view.t_choiceLangFrom.Selection=self.languagesFrom.index(config.defaultLangFrom)
         self.view.t_choiceLangTo.SetItems(self.languagesTo)
-        self.view.t_choiceLangTo.Selection = self.languagesTo.index(options.defaultLangTo)
+        self.view.t_choiceLangTo.Selection = self.languagesTo.index(config.defaultLangTo)
 
     def hide_controls(self):
         """
@@ -232,7 +232,7 @@ class ResultController:
         if langTo == "--------":
             self.view.t_choiceLangTo.Selection -= 1
             langTo=self.languagesTo[self.view.t_choiceLangTo.Selection]
-        options.countClickUp=2
+        config.countClickUp=2
         self.hide_controls()
         self.view.SetSize((50,17))
         self.view.Layout()
@@ -265,7 +265,7 @@ class ResultController:
             wx.TheClipboard.Close()
         else:
             wx.MessageBox(_("Unable to open the clipboard"), _("Error"))
-        options.isRunTranslate=False
+        config.isRunTranslate=False
         self.view.Hide()
 
     def event_close( self, event ):
@@ -273,14 +273,14 @@ class ResultController:
         hide frame
         """
 #        print "close result"
-        options.isRunTranslate=False
+        config.isRunTranslate=False
         self.view.Hide()
 
     def update_display(self, msg):
         """
         Receives data from thread and updates the frame
         """
-        options.isRunTranslate=False
+        config.isRunTranslate=False
         if msg.data[2]==self.countRunTranslator:
             lang=''
             if self.view.t_choiceLangFrom.GetStringSelection() == 'Auto':
