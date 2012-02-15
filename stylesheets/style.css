@@ -1,0 +1,184 @@
+* {
+    margin: 0;
+    padding: 0;
+}
+html {
+    height: 100%;
+}
+body {
+    font-family: trebuchet ms,serif;
+    width: 100%;
+    height: 100%;
+    background: url(../static/bg.png)  repeat-x scroll center top;
+}
+a {
+    color: #6b6b6b;
+    text-decoration: none;
+    font-weight: normal;
+    font-size: 13pt;
+}
+a:hover {
+    text-decoration: none;
+    color: #adadad;
+}
+p{
+    text-align: left;
+    font-size: 13pt;
+}
+
+span {
+    text-align: left;
+    font-size: 8pt;
+}
+
+h1, h2, h3, h4{
+    text-align: center;
+    font-weight: normal;
+    margin: 0 0 0.75em;
+}
+
+h1{
+    font-size: 40pt;
+    margin: 0 0 0.3em;
+}
+
+h2{
+    font-size: 30pt;
+}
+
+h3{
+    font-size: 20pt;
+}
+
+h4{
+    text-align: left;
+    font-size: 15pt;
+}
+
+ul.context1{
+    text-align: left;
+    font-size: 13pt;
+    margin: 0 0 0.75em 50px;
+}
+
+img {
+    border: none;
+}
+input {
+    vertical-align: middle;
+}
+#wrapper {
+    width: 900px;
+    margin: 0 auto;
+    min-height: 100%;
+}
+
+/* Header
+-----------------------------------------------------------------------------*/
+#header {
+    height: 80px;
+    width: 900px;
+}
+
+.barmiddle {
+    background: url(../static/header_elements.png) no-repeat;
+    height: 80px;
+    color: white;
+    text-align: center;
+    overflow: hidden;
+}
+
+.barlink {
+    padding: 30px;
+    color: #cfcfcf;
+    text-decoration: none;
+    font-weight: bold;
+    margin: 1px;
+    font-size: 16px
+}
+
+.barlink:hover {
+    color: #f7f7f7;
+}
+
+.bardiv {
+    padding-top: 16px
+}
+
+
+/* Middle
+-----------------------------------------------------------------------------*/
+#content {
+    padding: 0 0 10px;
+}
+
+span.content-text {
+    text-align: left;
+    font-size: 13pt;
+}
+
+.img-name{
+    margin-left: 320px;
+}
+
+.h2-main {
+    color: #757575;
+}
+
+.box-social-buttons{
+	border-radius: 3px;
+	clear: both;
+	position: absolute;
+	top: 40%;
+	background: #f0f0f0;
+}
+
+.box{
+    border-radius: 10px;
+    width: 410px;
+    height: 300px;
+    padding-top: 15px;
+    position: relative;
+    background: #cfcfcf;
+}
+
+.box-download{
+    background: #f0f0f0;
+    width: 430px;
+    border-radius: 10px;
+    height: 100%;
+    min-height: 500px;
+    padding-top: 30px;
+    position: relative;
+}
+
+.right-box {
+    float: right;
+}
+
+.left-box {
+    float: left;
+}
+
+.footer-box{
+    margin-left: 350px;
+    margin-top: 380px;
+    width: 200px;
+    height: 50px;
+    text-align: center;
+    padding-top: 10px;
+    border-radius: 6px;
+    background: #545354;
+}
+
+.footer-link {
+    color: #f7f7f7;
+    text-decoration: none;
+    font-weight: bold;
+    font-size: 30px;
+}
+
+
+
+
+
