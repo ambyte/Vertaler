@@ -129,8 +129,16 @@ span.content-text {
 	border-radius: 3px;
 	clear: both;
 	position: absolute;
+	text-align: center;
 	top: 40%;
 	background: #f0f0f0;
+}
+
+.box-lang{
+	clear: both;
+	position: absolute;
+	right: 10%; 
+	top: 3%;
 }
 
 .box{
