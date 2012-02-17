@@ -154,29 +154,29 @@ class HookManager(threading.Thread):
             if event.type == X.KeyPress:
                 hookevent = self.keypressevent(event)
 #                self.KeyDown(hookevent)
-                wx.CallAfter(pub.sendMessage,"KeyDown", hookevent)
+                #wx.CallAfter(pub.sendMessage,"KeyDown", hookevent)
                 self.event_call(hookevent)
             elif event.type == X.KeyRelease:
                 hookevent = self.keyreleaseevent(event)
 #                self.KeyUp(hookevent)
-                wx.CallAfter(pub.sendMessage,"KeyUp", hookevent)
+                #wx.CallAfter(pub.sendMessage,"KeyUp", hookevent)
                 self.event_call(hookevent)
             elif event.type == X.ButtonPress:
                 hookevent = self.buttonpressevent(event)
 #                self.MouseAllButtonsDown(hookevent)
-                wx.CallAfter(pub.sendMessage,"MouseAllButtonsDown", hookevent)
+                #wx.CallAfter(pub.sendMessage,"MouseAllButtonsDown", hookevent)
                 self.event_call(hookevent)
             elif event.type == X.ButtonRelease:
                 hookevent = self.buttonreleaseevent(event)
 #                self.MouseAllButtonsUp(hookevent)
-                wx.CallAfter(pub.sendMessage,"MouseAllButtonsUp", hookevent)
+                #wx.CallAfter(pub.sendMessage,"MouseAllButtonsUp", hookevent)
                 self.event_call(hookevent)
             elif event.type == X.MotionNotify:
                 # use mouse moves to record mouse position, since press and release events
                 # do not give mouse position info (event.root_x and event.root_y have
                 # bogus info).
-#                self.mousemoveevent(event)
-                wx.CallAfter(pub.sendMessage,"mousemoveevent", event)
+                self.mousemoveevent(event)
+                #wx.CallAfter(pub.sendMessage,"mousemoveevent", event)
 #                self.event_call(hookevent)
 
 #        print "processing events...", event.type

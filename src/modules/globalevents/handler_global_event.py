@@ -27,7 +27,8 @@ import wx
 from src.modules.settings import config
 
 if os.name =="posix":
-    from posix import popen
+    #from posix import popen
+    from src.modules.globalevents import pyxhook as hooklib
 elif os.name =="nt":
     import pyHook as hooklib
 from wx.lib.pubsub import pub
