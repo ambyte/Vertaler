@@ -30,6 +30,7 @@ from src.modules.settings import config
 from wx.lib.pubsub import pub
 from src.controllers.mainframecontroller import MainFrameController
 from src.controllers.popupcontroller import PopUpController
+from src.controllers.preconfiguringcontroller import PreconfiguringController
 from src.modules.globalevents.handler_global_event import HandlerGlobalEvents
 from src.gui import notification
 
@@ -44,6 +45,7 @@ elif os.name =="nt":
 class ControllerMain():
 
     def __init__(self):
+        pre=PreconfiguringController()
         publisher = pub.Publisher()
         self.mainFrame = MainFrameController()
         self.popUpFrame = PopUpController()

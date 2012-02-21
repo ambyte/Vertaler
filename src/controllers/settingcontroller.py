@@ -25,7 +25,7 @@
 import os
 import wx
 from src.gui.settingframe import SettingFrame
-import src.modules.settings.config as options
+from src.modules.settings import config
 from src.gui.settingframeforposix import SettingFrameForPosix
 
 if os.name =="nt":

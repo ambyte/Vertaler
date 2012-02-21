@@ -21,6 +21,7 @@ proxyPort=""
 proxyLogin=""
 proxyPassword=""
 isRunTranslate=False
+translatedTextSize=8
 langForTran = {
 'ar':'Arabic',
 'bg':'Bulgarian',
