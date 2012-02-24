@@ -31,7 +31,6 @@ if os.name =="nt":
 from wx.lib.pubsub import pub
 from src.gui.mainframe import MainFrame, MainTaskBarIcon
 from src.controllers import settinglangcontroller , aboutcontroller, settingcontroller
-from src.modules import options
 from src.modules.settings.config import langForTran
 
 

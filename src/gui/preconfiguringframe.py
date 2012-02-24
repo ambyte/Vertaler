@@ -28,7 +28,7 @@ from src.modules.settings import config
 class PreconfiguringFrame ( wx.wizard.Wizard ):
 
     def __init__( self ):
-        wx.wizard.Wizard.__init__ ( self, None, id = wx.ID_ANY, title = u"Preconfiguring Vertaler",  bitmap = wx.Bitmap( config.get_main_dir()+"/src/icons/appicons/app_image.png", wx.BITMAP_TYPE_ANY ), pos = wx.DefaultPosition, style = wx.DEFAULT_DIALOG_STYLE|wx.STAY_ON_TOP )
+        wx.wizard.Wizard.__init__ ( self, None, id = wx.ID_ANY, title = _("Preconfiguring Vertaler"),  bitmap = wx.Bitmap( config.get_main_dir()+"/src/icons/appicons/qwe2.png", wx.BITMAP_TYPE_ANY ), pos = wx.DefaultPosition, style = wx.DEFAULT_DIALOG_STYLE|wx.STAY_ON_TOP )
 
         self.SetSizeHintsSz( wx.DefaultSize, wx.DefaultSize )
         self.m_pages = []
@@ -38,7 +38,7 @@ class PreconfiguringFrame ( wx.wizard.Wizard ):
 
         bSizer3 = wx.BoxSizer( wx.VERTICAL )
 
-        self.p_staticTextNatLang = wx.StaticText( self.p_wizPageNatLang, wx.ID_ANY, u"Select your native language", wx.DefaultPosition, wx.DefaultSize, wx.ALIGN_CENTRE )
+        self.p_staticTextNatLang = wx.StaticText( self.p_wizPageNatLang, wx.ID_ANY, _("Select your native language"), wx.DefaultPosition, wx.DefaultSize, wx.ALIGN_CENTRE )
         self.p_staticTextNatLang.Wrap( -1 )
         self.p_staticTextNatLang.SetFont( wx.Font( 12, 74, 90, 92, False, "Tahoma" ) )
 
@@ -58,7 +58,7 @@ class PreconfiguringFrame ( wx.wizard.Wizard ):
 
         bSizer4 = wx.BoxSizer( wx.VERTICAL )
 
-        self.p_staticTextComTran = wx.StaticText( self.p_wizPageComTran, wx.ID_ANY, u"Select languages from which most commonly translate", wx.DefaultPosition, wx.DefaultSize, wx.ALIGN_CENTRE )
+        self.p_staticTextComTran = wx.StaticText( self.p_wizPageComTran, wx.ID_ANY, _("Select the languages from which most commonly translate"), wx.DefaultPosition, wx.DefaultSize, wx.ALIGN_CENTRE )
         self.p_staticTextComTran.Wrap( -1 )
         self.p_staticTextComTran.SetFont( wx.Font( 12, 74, 90, 92, False, "Tahoma" ) )
 
@@ -78,9 +78,9 @@ class PreconfiguringFrame ( wx.wizard.Wizard ):
 
         bSizer5 = wx.BoxSizer( wx.VERTICAL )
 
-        sbSizerSizeText = wx.StaticBoxSizer( wx.StaticBox( self.p_wizPageOther, wx.ID_ANY, u"The size of the text in the translation window" ), wx.VERTICAL )
+        sbSizerSizeText = wx.StaticBoxSizer( wx.StaticBox( self.p_wizPageOther, wx.ID_ANY, _("The size of the text in the translation window") ), wx.VERTICAL )
 
-        self.p_staticTextSizeText = wx.StaticText( self.p_wizPageOther, wx.ID_ANY, u"Translated text", wx.Point( -1,-1 ), wx.DefaultSize, 0 )
+        self.p_staticTextSizeText = wx.StaticText( self.p_wizPageOther, wx.ID_ANY, _("Translated text"), wx.Point( -1,-1 ), wx.DefaultSize, 0 )
         self.p_staticTextSizeText.Wrap( -1 )
         self.p_staticTextSizeText.SetFont( wx.Font( 8, wx.SWISS, wx.NORMAL, wx.NORMAL ) )
         sbSizerSizeText.Add( self.p_staticTextSizeText, 1, wx.ALL, 5 )
@@ -92,7 +92,7 @@ class PreconfiguringFrame ( wx.wizard.Wizard ):
 
         bSizer5.Add( sbSizerSizeText, 1, wx.EXPAND, 5 )
 
-        sbSizerTranServ = wx.StaticBoxSizer( wx.StaticBox( self.p_wizPageOther, wx.ID_ANY, u"The default translation service" ), wx.VERTICAL )
+        sbSizerTranServ = wx.StaticBoxSizer( wx.StaticBox( self.p_wizPageOther, wx.ID_ANY, _("The default translation service") ), wx.VERTICAL )
 
         self.p_radioBtnGoogle = wx.RadioButton( self.p_wizPageOther, wx.ID_ANY, u"Google", wx.DefaultPosition, wx.DefaultSize, 0 )
         self.p_radioBtnGoogle.SetValue( True )
@@ -103,21 +103,21 @@ class PreconfiguringFrame ( wx.wizard.Wizard ):
 
         bSizer5.Add( sbSizerTranServ, 1, wx.EXPAND, 5 )
 
-        sbSizerProxy = wx.StaticBoxSizer( wx.StaticBox( self.p_wizPageOther, wx.ID_ANY, u"Proxy server if there is" ), wx.VERTICAL )
+        sbSizerProxy = wx.StaticBoxSizer( wx.StaticBox( self.p_wizPageOther, wx.ID_ANY, _("Proxy server if there is") ), wx.VERTICAL )
 
         bSizer11 = wx.BoxSizer( wx.HORIZONTAL )
 
-        self.p_textCtrlAddress = wx.TextCtrl( self.p_wizPageOther, wx.ID_ANY, u"Address", wx.DefaultPosition, wx.DefaultSize, 0 )
+        self.p_textCtrlAddress = wx.TextCtrl( self.p_wizPageOther, wx.ID_ANY, _("Address"), wx.DefaultPosition, wx.DefaultSize, 0 )
         self.p_textCtrlAddress.SetForegroundColour( wx.SystemSettings.GetColour( wx.SYS_COLOUR_GRAYTEXT ) )
-        self.p_textCtrlAddress.SetToolTipString( u"Address" )
+        self.p_textCtrlAddress.SetToolTipString( _("Address") )
         self.p_textCtrlAddress.Name="0Address"
 
 
         bSizer11.Add( self.p_textCtrlAddress, 1, wx.ALL|wx.EXPAND, 5 )
 
-        self.p_textCtrlPort = wx.TextCtrl( self.p_wizPageOther, wx.ID_ANY, u"Port", wx.DefaultPosition, wx.DefaultSize, 0 )
+        self.p_textCtrlPort = wx.TextCtrl( self.p_wizPageOther, wx.ID_ANY, _("Port"), wx.DefaultPosition, wx.DefaultSize, 0 )
         self.p_textCtrlPort.SetForegroundColour( wx.SystemSettings.GetColour( wx.SYS_COLOUR_GRAYTEXT ) )
-        self.p_textCtrlPort.SetToolTipString( u"Port" )
+        self.p_textCtrlPort.SetToolTipString( _("Port") )
         self.p_textCtrlPort.Name="0Port"
 
 
@@ -127,17 +127,17 @@ class PreconfiguringFrame ( wx.wizard.Wizard ):
 
         bSizer12 = wx.BoxSizer( wx.HORIZONTAL )
 
-        self.p_textCtrlLogin = wx.TextCtrl( self.p_wizPageOther, wx.ID_ANY, u"Login", wx.DefaultPosition, wx.DefaultSize, 0 )
+        self.p_textCtrlLogin = wx.TextCtrl( self.p_wizPageOther, wx.ID_ANY, _("Login"), wx.DefaultPosition, wx.DefaultSize, 0 )
         self.p_textCtrlLogin.SetForegroundColour( wx.SystemSettings.GetColour( wx.SYS_COLOUR_GRAYTEXT ) )
-        self.p_textCtrlLogin.SetToolTipString( u"Login" )
+        self.p_textCtrlLogin.SetToolTipString( _("Login") )
         self.p_textCtrlLogin.Name="0Login"
 
 
         bSizer12.Add( self.p_textCtrlLogin, 1, wx.ALL|wx.EXPAND, 5 )
 
-        self.p_textCtrlPass = wx.TextCtrl( self.p_wizPageOther, wx.ID_ANY, u"Password", wx.DefaultPosition, wx.DefaultSize, 0 )
+        self.p_textCtrlPass = wx.TextCtrl( self.p_wizPageOther, wx.ID_ANY, _("Password"), wx.DefaultPosition, wx.DefaultSize, 0 )
         self.p_textCtrlPass.SetForegroundColour( wx.SystemSettings.GetColour( wx.SYS_COLOUR_GRAYTEXT ) )
-        self.p_textCtrlPass.SetToolTipString( u"Password" )
+        self.p_textCtrlPass.SetToolTipString( _("Password") )
         self.p_textCtrlPass.Name="0Password"
 
 

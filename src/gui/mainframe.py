@@ -32,7 +32,7 @@ class MainTaskBarIcon(wx.TaskBarIcon):
         if os.name=="posix":
             self.mainIcon = wx.Icon(config.get_main_dir()+"/src/icons/appicons/app_icon_main24.png",wx.BITMAP_TYPE_PNG)
         elif os.name=="nt":
-            self.mainIcon = wx.Icon(config.get_main_dir()+"/src/icons/appicons/app_icon.ico",wx.BITMAP_TYPE_ICO)
+            self.mainIcon = wx.Icon(config.get_main_dir()+"/src/icons/appicons/qwe.ico",wx.BITMAP_TYPE_ICO)
 
         self.create_menu()
         self.set_icon_image()
@@ -274,7 +274,7 @@ class MainFrame ( wx.Frame ):
 
         self.m_statusBar1 = self.CreateStatusBar( 1, wx.ST_SIZEGRIP, wx.ID_ANY )
 
-        favicon = wx.Icon(config.get_main_dir()+"/src/icons/appicons/app_icon.ico", wx.BITMAP_TYPE_ICO, 16, 16)
+        favicon = wx.Icon(config.get_main_dir()+"/src/icons/appicons/qwe.ico", wx.BITMAP_TYPE_ICO, 16, 16)
         self.SetIcon(favicon)
 #        self.tbicon = MainTaskBarIcon(self)
 
