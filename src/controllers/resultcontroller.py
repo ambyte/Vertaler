@@ -280,20 +280,54 @@ class ResultController:
         """
         Receives data from thread and updates the frame
         """
-        config.isRunTranslate=False
-        if msg.data[2]==self.countRunTranslator:
-            lang=''
-            if self.view.t_choiceLangFrom.GetStringSelection() == 'Auto':
-                for k, v in langForTran.iteritems():
+
+        if config.useGoogle:
+            config.isRunTranslate=False
+            tranText=msg.data[1][0][0]
+            ishText=msg.data[1][0][1]
+            latTranText=msg.data[1][0][2]
+            latIshText=msg.data[1][0][3]
+            dTranText=""
+            translatedText=""
+            try:
+                for text in  msg.data[1][1]:
+                    dTranText+=text+" "
+            except Exception:
+                pass
+
+            if msg.data[len(msg.data)-1]==self.countRunTranslator:
+                lang=''
+                if self.view.t_choiceLangFrom.GetStringSelection() == 'Auto':
+                    for k, v in langForTran.iteritems():
                         if k==msg.data[0]:
                             lang=v
-                self.view.t_textCtrl.SetValue(msg.data[1]+'\n('+_('Source lang is ') +lang+')')
-            else: self.view.t_textCtrl.SetValue(msg.data[1])
+                    if dTranText!="":
+                        translatedText=tranText+'\n--------------\n'+dTranText+'\n-------------\n('+_('Source lang is ') +lang+')'
+                        self.view.t_textCtrl.SetValue(tranText+'\n--------------\n'+dTranText+'\n-------------\n('+_('Source lang is ') +lang+')')
+                    else:
+                        translatedText=tranText+'\n-------------\n('+_('Source lang is ') +lang+')'
+                        self.view.t_textCtrl.SetValue(tranText+'\n-------------\n('+_('Source lang is ') +lang+')')
+                else: self.view.t_textCtrl.SetValue(tranText)
 
-            self.translatedText=msg.data[1]
-            self.show_controls()
-            self.set_size(msg.data[1])
-            self.set_position()
-            self.countRunTranslator=0
+                self.translatedText=msg.data[1][0][0]
+                self.show_controls()
+                self.set_size(translatedText)
+                self.set_position()
+                self.countRunTranslator=0
+        else:
+            config.isRunTranslate=False
+            if msg.data[2]==self.countRunTranslator:
+                lang=''
+                if self.view.t_choiceLangFrom.GetStringSelection() == 'Auto':
+                    for k, v in langForTran.iteritems():
+                            if k==msg.data[0]:
+                                lang=v
+                    self.view.t_textCtrl.SetValue(msg.data[1]+'\n('+_('Source lang is ') +lang+')')
+                else: self.view.t_textCtrl.SetValue(msg.data[1])
 
+                self.translatedText=msg.data[1]
+                self.show_controls()
+                self.set_size(msg.data[1])
+                self.set_position()
+                self.countRunTranslator=0
 

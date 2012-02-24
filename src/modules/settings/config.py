@@ -2,6 +2,7 @@
 version=0.2
 visitedVersion=0.2
 enableNotification=True
+isFirstStart=True
 countClickUp=0
 langList=['English','Russian']
 searchEngines=['Google','Bing','Yahoo','Yandex']

@@ -37,6 +37,7 @@ class Translator(object):
         :param app_id: A string containing the Bing AppID.
         """
         self.app_id = app_id
+        self.det=True
 
     def call(self, url, params):
         """Calls the given url with the params urlencoded """
@@ -44,9 +45,12 @@ class Translator(object):
             params['appId'] = self.app_id
             request=httprequest.HttpRequest()
             response=request.http_request(url,params=params,method='GET')
-            rv =  json.loads(response.decode("UTF-8-sig"))
+            if self.det:
+                rv=json.loads(response[1:])
+            else:
+                rv =  json.loads(response.decode("UTF-8-sig"))
             return rv
-        except Exception:
+        except Exception, ex:
             return _("Sorry, Can't connect to the server!")
 
 
@@ -75,6 +79,7 @@ class Translator(object):
             }
         if from_lang is not None:
             params['from'] = from_lang
+        self.det=False
         return self.call(
             "http://api.microsofttranslator.com/V2/Ajax.svc/Translate",
             params)
@@ -84,6 +89,7 @@ class Translator(object):
         The Detect method will detect the language modules of a given piece of text
         :param text: text for detecting the language modules.
         """
+        self.det=True
         params = {'text': text}
         return self.call(
                 "http://api.microsofttranslator.com/V2/Ajax.svc/Detect",

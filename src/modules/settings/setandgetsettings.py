@@ -29,7 +29,7 @@ from src.modules.settings import config
 class Settings():
     def __init__(self):
         self.cfg = wx.Config('vertalerconfig')
-        self.initialization_config()
+#        self.initialization_config()
 
     def initialization_config(self):
         if self.cfg.Exists('langList'):
@@ -77,6 +77,8 @@ class Settings():
         if self.cfg.Exists('proxyPassword'):
             data = self.cfg.Read("proxyPassword")
             config.proxyPassword=str(unicode(data))
+        if self.cfg.Exists('isFirstStart'):
+            config.isFirstStart = self.cfg.ReadBool("isFirstStart")
         return True
 
     def set_global_params(self):
@@ -99,6 +101,7 @@ class Settings():
         self.cfg.Write("proxyPassword", config.proxyPassword)
         self.cfg.Write("defaultLangFrom", config.defaultLangFrom)
         self.cfg.Write("defaultLangTo", config.defaultLangTo)
+        self.cfg.WriteBool("isFirstStart", config.isFirstStart)
         self.cfg.Flush()
 
     def save_lang_param(self):

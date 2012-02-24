@@ -30,7 +30,7 @@ def translate_google(text, sourcelang="auto", targetlang="ru"):
 	#Mozilla/5.0 (Windows NT 5.1) AppleWebKit/535.11 (KHTML, like Gecko) Chrome/17.0.963.46 Safari/535.11
 	#Request URL:http://translate.google.ru/translate_a/t?client=t&text=%D0%BF%D1%80%D0%B8%D0%B2%D0%B5%D1%82&hl=ru&sl=auto&tl=en&multires=1&srcrom=1&prev=btn&ssel=0&tsel=0&uptl=en&alttl=ja&sc=1
 	#client:t
-	#text:привет
+	#text:пїЅпїЅпїЅпїЅпїЅпїЅ
 	#hl:ru
 	#sl:auto
 	#tl:en
@@ -55,21 +55,31 @@ def translate_google(text, sourcelang="auto", targetlang="ru"):
         response=request.http_request(url,data=data,headers=headers)
         fixedJSON = re.sub(r',{2,}', ',', response).replace(',]', ']')
         data = json.loads(fixedJSON)
-        resultData=''
+#        resultData=''
+        resultData=[]
         try:
-            # if many words
             if len(text.split(' '))>1:
-                for row in data[2]:
-                    resultData+=row[0]+" "
+                rData=[]
+                r0Data=''
+                r1Data=''
+                r2Data=''
+                r3Data=''
+                for row in data[0]:
+                    r0Data+=row[0]+" "
+                    r1Data+=row[1]+" "
+                    r2Data+=row[2]+" "
+                    r3Data+=row[3]+" "
+                rData.append(r0Data)
+                rData.append(r1Data)
+                rData.append(r2Data)
+                rData.append(r3Data)
+                resultData.append(rData)
             else:
-                resultData=data[0][0][0]
+                resultData.append(data[0][0])
                 if not type(data[1]) is unicode:
-                    resultData += '\n----\n'
-                    for row in data[1][0][1]:
-                        resultData +=u"%s " % row
-        except Exception:
+                    resultData.append(data[1][0][1])
+        except Exception, ex:
             pass
-        resultData=resultData.replace(" ,",",")
         return resultData
     except Exception, e:
         return _("Sorry, Can't connect to the server!")

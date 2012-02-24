@@ -63,8 +63,8 @@ class PreconfiguringController:
         else :
             config.useGoogle=True
             config.useBing=False
-        if self.view.p_listBoxComTran.GetSelection():
-            config.langList=self.view.p_listBoxComTran.GetSelection()
+        if self.view.p_listBoxComTran.GetSelections():
+            config.langList=self.view.p_listBoxComTran.GetSelections()
         if self.view.p_listBoxNatLang.GetSelection():
             config.defaultLangTo=self.view.p_listBoxNatLang.GetSelection()
         config.translatedTextSize=self.view.p_sliderSizeText.Value+8
@@ -74,7 +74,9 @@ class PreconfiguringController:
             config.proxyPort=self.view.p_textCtrlPort.Value
             config.proxyLogin=self.view.p_textCtrlLogin.Value
             config.proxyPassword=self.view.p_textCtrlPass.Value
+        config.isFirstStart=False
         self.view.Destroy()
 
     def event_wizard_cancel( self, event ):
+        config.isFirstStart=False
         self.view.Destroy()

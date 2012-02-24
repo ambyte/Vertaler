@@ -26,7 +26,7 @@ import os
 import wx
 import sys
 import time
-from src.modules.settings import config
+from src.modules.settings import config, setandgetsettings
 from wx.lib.pubsub import pub
 from src.controllers.mainframecontroller import MainFrameController
 from src.controllers.popupcontroller import PopUpController
@@ -45,7 +45,10 @@ elif os.name =="nt":
 class ControllerMain():
 
     def __init__(self):
-        pre=PreconfiguringController()
+        settings = setandgetsettings.Settings()
+        settings.initialization_config()
+        if config.isFirstStart:
+            PreconfiguringController()
         publisher = pub.Publisher()
         self.mainFrame = MainFrameController()
         self.popUpFrame = PopUpController()

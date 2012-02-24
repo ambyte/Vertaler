@@ -38,7 +38,7 @@ class PreconfiguringFrame ( wx.wizard.Wizard ):
 
         bSizer3 = wx.BoxSizer( wx.VERTICAL )
 
-        self.p_staticTextNatLang = wx.StaticText( self.p_wizPageNatLang, wx.ID_ANY, _("Select your native language"), wx.DefaultPosition, wx.DefaultSize, wx.ALIGN_CENTRE )
+        self.p_staticTextNatLang = wx.StaticText( self.p_wizPageNatLang, wx.ID_ANY, _("Select your native language"), wx.DefaultPosition, wx.DefaultSize, wx.ALIGN_LEFT )
         self.p_staticTextNatLang.Wrap( -1 )
         self.p_staticTextNatLang.SetFont( wx.Font( 12, 74, 90, 92, False, "Tahoma" ) )
 
@@ -58,7 +58,7 @@ class PreconfiguringFrame ( wx.wizard.Wizard ):
 
         bSizer4 = wx.BoxSizer( wx.VERTICAL )
 
-        self.p_staticTextComTran = wx.StaticText( self.p_wizPageComTran, wx.ID_ANY, _("Select the languages from which most commonly translate"), wx.DefaultPosition, wx.DefaultSize, wx.ALIGN_CENTRE )
+        self.p_staticTextComTran = wx.StaticText( self.p_wizPageComTran, wx.ID_ANY, _("Select the languages from which most commonly translate"), wx.DefaultPosition, wx.DefaultSize, wx.ALIGN_LEFT )
         self.p_staticTextComTran.Wrap( -1 )
         self.p_staticTextComTran.SetFont( wx.Font( 12, 74, 90, 92, False, "Tahoma" ) )
 

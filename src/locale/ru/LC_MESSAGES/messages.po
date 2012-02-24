@@ -251,3 +251,16 @@ msgstr "Сервис перевода по умолчанию"
 
 msgid "Proxy server if there is"
 msgstr "Прокси сервер, если необходимо"
+
+msgid "Address"
+msgstr "Адрес"
+
+msgid "Port"
+msgstr "Порт"
+
+msgid "Login"
+msgstr "Логин"
+
+msgid "Password"
+msgstr "Пароль"
+
