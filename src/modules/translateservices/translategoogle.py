@@ -65,10 +65,10 @@ def translate_google(text, sourcelang="auto", targetlang="ru"):
                 r2Data=''
                 r3Data=''
                 for row in data[0]:
-                    r0Data+=row[0]+" "
-                    r1Data+=row[1]+" "
-                    r2Data+=row[2]+" "
-                    r3Data+=row[3]+" "
+                    r0Data+=row[0].replace(' ,',',')+" "
+                    r1Data+=row[1].replace(' ,',',')+" "
+                    r2Data+=row[2].replace(' ,',',')+" "
+                    r3Data+=row[3].replace(' ,',',')+" "
                 rData.append(r0Data)
                 rData.append(r1Data)
                 rData.append(r2Data)

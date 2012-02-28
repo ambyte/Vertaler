@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-
+from __future__ import unicode_literals
 # ----------------------------------------------------------------------------
 # Copyright (c) 2011 Sergey Gulyaev <astraway@gmail.com>
 #
@@ -188,16 +188,31 @@ class ResultController:
         """
         set frame size
         """
-        if '----' in dataText:
-            self.view.SetSize((315,100+len(dataText)*0.2))
-        elif len(dataText)<=1500:
-            width=315+len(dataText)/2.5
-            height=80+len(dataText)*0.2
-            if width>500: width=500
-            if height>400:height=400
-            self.view.SetSize((width,height))
-        elif len(dataText)>1500:
-            self.view.SetSize((500,400))
+        width=315+len(dataText)/2.5
+        self.view.SetSize((width,100))
+        numLines=self.view.t_textCtrl.GetNumberOfLines()
+        w,h = self.view.t_textCtrl.GetTextExtent(dataText)
+        height=numLines*h+45
+        if width > 500: width=500
+        if height > 400: height=400
+        self.view.SetSize((width,height))
+
+    def GetLineHeight(self,rtc,tallString):
+#        rtc.SetInsertionPoint(0)
+#        rtc.PageDown()
+#        pos = rtc.GetInsertionPoint()
+#        end = tallString.find("\n",pos)
+##        lineHeight=int(tallString[pos+2:end])
+#        lineHeight=end-pos
+#        return lineHeight
+        tallString = "\n".join([str(i) for i in xrange(200)])
+        rtc.SetValue(tallString)
+        rtc.SetInsertionPoint(0)
+        rtc.PageDown()
+        pos = rtc.GetInsertionPoint()
+        end = tallString.find("\n",pos)
+        lineHeight=int(tallString[pos:end])
+        return lineHeight
 
     def on_mouse_left_down(self, evt):
         self.ldPos = evt.GetEventObject().ClientToScreen(evt.GetPosition())
