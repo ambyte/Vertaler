@@ -1,3 +1,5 @@
+# At the moment the project abandoned and rewritten for c # with a different name.
+
 ### Vertaler is a free translator, which allows to translate the text in any of applications, using Google Translate and Bing Translator services
 
 ### [vertalerproject.org](http://www.vertalerproject.org/ "Vertaler site")
