@@ -2,8 +2,6 @@
 
 ### Vertaler is a free translator, which allows to translate the text in any of applications, using Google Translate and Bing Translator services
 
-### [vertalerproject.org](http://www.vertalerproject.org/ "Vertaler site")
-
 #### Features
 
 - Translate over 30 languages
