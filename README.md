@@ -1,4 +1,4 @@
-# At the moment the project abandoned and rewritten for c # with a different name.
+# At the moment the project abandoned. See the new project http://everylang.org/
 
 ### Vertaler is a free translator, which allows to translate the text in any of applications, using Google Translate and Bing Translator services
 
